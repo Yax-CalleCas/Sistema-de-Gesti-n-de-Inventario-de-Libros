@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Perfil | Configuración</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.2/css/all.min.css"
+	rel="stylesheet">
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/Css/clienteconfiguracion.css}">
+</head>
+
+<body>
+	<div class="container py-5">
+		<div class="row justify-content-center">
+			<div class="col-lg-7 col-md-8">
+				<div class="card shadow-lg border-0">
+					<div class="card-header">
+						<h4 class="m-0">
+							<i class="fa-solid fa-user-circle me-2"></i> Mi Perfil y
+							Configuración
+						</h4>
+					</div>
+
+					<div class="card-body p-5">
+						<form th:action="@{/cliente/configuracion/actualizar}"
+							th:object="${cliente}" method="post"
+							enctype="multipart/form-data" id="formPerfilCliente">
+
+							<div class="mb-4 text-center">
+								<div class="profile-img-container">
+									<img th:if="*{imagenUrl}" th:src="*{imagenUrl}"
+										class="rounded-circle profile-img" width="130" height="130"
+										alt="Foto de perfil"> <img th:unless="*{imagenUrl}"
+										src="https://via.placeholder.com/130/0d6efd/FFFFFF?text=Avatar"
+										class="rounded-circle profile-img" width="130" height="130"
+										alt="Avatar por defecto">
+								</div>
+							</div>
+
+							<div class="row mb-3 g-3">
+								<div class="col-md-6">
+									<label class="form-label fw-semibold">Nombre</label> <input
+										type="text" th:field="*{nombre}" class="form-control" required>
+								</div>
+								<div class="col-md-6">
+									<label class="form-label fw-semibold">Apellido</label> <input
+										type="text" th:field="*{apellido}" class="form-control"
+										required>
+								</div>
+							</div>
+
+							<div class="row mb-4 g-3">
+								<div class="col-md-6">
+									<label class="form-label fw-semibold">Correo
+										Electrónico</label> <input type="email" th:field="*{email}"
+										class="form-control" required>
+								</div>
+								<div class="col-md-6">
+									<label class="form-label fw-semibold">Contraseña</label> <input
+										type="password" th:field="*{password}" class="form-control"
+										placeholder="Dejar en blanco para no cambiar">
+								</div>
+							</div>
+
+							<div class="mb-4">
+								<label class="form-label fw-semibold">Imagen de Perfil
+									(URL)</label> <input type="text" th:field="*{imagenUrl}"
+									class="form-control"
+									placeholder="Pega aquí la URL de tu imagen de perfil">
+							</div>
+
+
+							<div class="text-center mt-5">
+								<button class="btn btn-success-main me-3" type="submit">
+									<i class="fa-solid fa-save me-2"></i> Guardar Cambios
+								</button>
+								<a th:href="@{/cliente}" class="btn btn-secondary"> <i
+									class="fa-solid fa-arrow-left me-2"></i> Volver
+								</a>
+							</div>
+						</form>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+	<script th:if="${param.success}">
+    Swal.fire({
+        icon: 'success',
+        title: '¡Actualizado!',
+        text: 'Tus cambios se guardaron correctamente.',
+        showConfirmButton: false,
+        timer: 2000
+    });
+</script>
+
+	<script>
+    const form = document.getElementById('formPerfilCliente');
+    form.addEventListener('submit', function (e) {
+        e.preventDefault();
+        Swal.fire({
+            title: '¿Confirmar actualización?',
+            text: 'Tu perfil será actualizado con los nuevos datos.',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#198754', // verde
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Sí, guardar',
+            cancelButtonText: 'Cancelar'
+        }).then((result) => {
+            if (result.isConfirmed) {
+                form.submit();
+            }
+        });
+    });
+</script>
+
+</body>
+</html>

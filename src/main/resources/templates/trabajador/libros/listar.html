@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Gestión de Libros | BookFlow</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.3/font/bootstrap-icons.css" rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap"
+	rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/Css/gestionLibros.css}"> 
+
+</head>
+<body class="bg-light">
+
+	<div class="container py-5">
+		
+		<div class="d-flex justify-content-between align-items-center mb-4 header-gestion">
+			<h2 class="page-title text-primary fw-bold">
+				<i class="bi bi-book-half me-2"></i> Gestión de Inventario
+			</h2>
+			<div>
+				<a th:href="@{/trabajador}" class="btn btn-outline-secondary btn-accion">
+					<i class="bi bi-arrow-left me-1"></i> Dashboard
+				</a> 
+				<a th:href="@{/trabajador/libros/nuevo}"
+					class="btn btn-primary-alt ms-2 btn-accion"> 
+					<i class="bi bi-plus-circle-fill me-1"></i> Añadir Libro
+				</a>
+			</div>
+		</div>
+
+		<div th:if="${msgExito}"
+			class="alert alert-success alert-dismissible fade show" role="alert">
+			<i class="bi bi-check-circle-fill me-2"></i> <span th:text="${msgExito}"></span>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+		<div th:if="${msgError}"
+			class="alert alert-danger alert-dismissible fade show" role="alert">
+			<i class="bi bi-exclamation-triangle-fill me-2"></i> <span
+				th:text="${msgError}"></span>
+			<button type="button" class="btn-close" data-bs-dismiss="alert"></button>
+		</div>
+
+		<div class="card shadow-lg card-inventario">
+			<div class="card-body p-4">
+				<div class="table-responsive">
+					<table class="table table-hover align-middle table-striped table-libros">
+						<thead class="bg-primary text-white">
+							<tr>
+								<th class="d-md-table-cell text-center" style="width: 60px;">ID</th>
+								<th class="text-center" style="width: 80px;">Portada</th>
+								<th>Título y Autor</th>
+								<th class="d-md-table-cell">ISBN</th>
+								<th class="text-end" style="width: 150px;">Precio</th>
+								<th class="text-center" style="width: 100px;">Stock</th>
+								<th class="d-md-table-cell">Editorial</th>
+								<th class="text-center" style="width: 120px;">Acciones</th>
+							</tr>
+						</thead>
+						<tbody>
+							<tr th:each="libro : ${libros}">
+								<td th:text="${libro.id}" class="d-md-table-cell text-center text-muted small"></td>
+								
+								<td class="text-center">
+									<img th:if="${libro.imagenUrl}" th:src="${libro.imagenUrl}"
+										alt="Portada" class="cover-img"> 
+									<i th:unless="${libro.imagenUrl}" class="bi bi-journal-album text-secondary fa-2x"></i>
+								</td>
+								
+								<td>
+									<span th:text="${libro.titulo}" class="fw-bold d-block text-primary-dark"></span>
+									<span class="text-muted small" th:text="${libro.autor.nombre}"></span>
+								</td>
+								
+								<td th:text="${libro.isbn}" class="d-md-table-cell small text-muted"></td>
+								
+								<td class="text-end fw-semibold">
+									<div th:text="${#numbers.formatCurrency(libro.precioFinal)}" class="mb-0 text-success">S/ 45.00</div>
+									<small th:if="${libro.descuento != null and libro.descuento > 0}" class="text-danger fw-bold">
+										<i class="bi bi-tags-fill"></i> 
+										<span th:text="${#numbers.formatPercent(libro.descuento, 1, 0)}">10%</span>
+									</small>
+									<small th:if="${libro.descuento != null and libro.descuento > 0}" class="text-muted text-decoration-line-through d-block">
+										<span th:text="${#numbers.formatCurrency(libro.precio)}">S/ 50.00</span>
+									</small>
+								</td>
+								
+								<td class="text-center">
+									<span th:text="${libro.stock}"
+										th:classappend="${libro.stock le 10 ? 'badge bg-danger p-2' : 'badge bg-success p-2'}">10</span>
+								</td>
+								
+								<td th:text="${libro.editorial.nombre}" class="d-md-table-cell small text-muted"></td>
+								
+								<td class="text-center">
+									<a th:href="@{'/trabajador/libros/editar/' + ${libro.id}}"
+										class="btn btn-sm btn-outline-warning me-1 btn-accion" title="Editar"> 
+										<i class="bi bi-pencil-square"></i>
+									</a> 
+									<button type="button" class="btn btn-sm btn-outline-danger btn-accion" title="Eliminar" 
+									        th:attr="onclick=|confirmarEliminarLibro('${libro.id}', '${libro.titulo}')|">
+										<i class="bi bi-trash-fill"></i>
+									</button>
+								</td>
+							</tr>
+							<tr th:if="${#lists.isEmpty(libros)}">
+								<td colspan="8" class="text-center text-muted py-4"><i
+									class="bi bi-info-circle-fill me-2"></i> No hay libros registrados
+									en el inventario.</td>
+							</tr>
+						</tbody>
+					</table>
+				</div>
+			</div>
+		</div>   
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+	<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+	
+	<script>
+        function confirmarEliminarLibro(id, titulo) {
+            Swal.fire({
+                title: '¿Eliminar Libro?',
+                html: `Estás a punto de eliminar el libro: <b>${titulo}</b> (ID: ${id}).<br>Esta acción es irreversible.`,
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#d33',
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, eliminar',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    // Redirige al endpoint de eliminación
+                    window.location.href = `/trabajador/libros/eliminar/${id}`;
+                }
+            });
+        }
+    </script>
+</body>
+</html>

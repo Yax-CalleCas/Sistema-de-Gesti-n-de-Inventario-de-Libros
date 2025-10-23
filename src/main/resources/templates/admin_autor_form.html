@@ -1,0 +1,135 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title th:text="${autor.id != null} ? 'Editar Autor' : 'Nuevo Autor'"></title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+
+/* Fondo del Cuerpo */
+body {
+    background-color: #f9fafc; /* Fondo gris muy claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* Navbar */
+.navbar-custom {
+    background-color: rgb(64, 0, 128); /* Púrpura oscuro */
+    border-color: rgb(50, 0, 100);
+}
+
+.navbar-custom .navbar-brand {
+    color: #fff; /* Texto blanco */
+    font-weight: 600;
+}
+
+/* Estilo para el contenedor del formulario (simulando form-panel) */
+.form-container {
+    background: #fff;
+    border: 1px solid #e0e0e0; /* Borde gris claro */
+    border-radius: 12px; /* Esquinas redondeadas */
+    padding: 30px; /* Más padding para formularios grandes */
+    margin-bottom: 20px;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.05); /* Sombra sutil */
+}
+
+/* Títulos principales */
+h2 {
+    color: rgb(64, 0, 128); /* Título púrpura */
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+/* Botones */
+/* Botón Guardar (btn-success) */
+.btn-success { 
+    background-color: rgb(64, 0, 128);
+    border-color: rgb(50, 0, 100);
+}
+
+.btn-success:hover, .btn-success:focus {
+    background-color: rgb(50, 0, 100);
+    border-color: rgb(30, 0, 60);
+    color: white;
+}
+
+
+hr {
+    border-top: 1px solid #e0e0e0;
+}
+</style>
+</head>
+<body>
+
+	<nav class="navbar navbar-custom navbar-fixed-top"> 
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" href="/admin">Panel de Administración BookFlow </a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container" style="margin-top: 80px;">
+		<h2 th:text="${autor.id != null} ? 'Editar Autor' : 'Nuevo Autor'"></h2>
+
+        <div class="row">
+            <div class="col-md-9 col-sm-12 form-container"> 
+                <form th:action="@{/admin/autores}" th:object="${autor}" method="post"
+                    class="form-horizontal">
+                    <input type="hidden" th:field="*{id}" />
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Nombre:</label>
+                        <div class="col-sm-7">
+                            <input type="text" th:field="*{nombre}" class="form-control"
+                                placeholder="Nombre del autor" required>
+                        </div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Nacionalidad:</label>
+                        <div class="col-sm-7">
+                            <input type="text" th:field="*{nacionalidad}" class="form-control"
+                                placeholder="País de origen">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">URL de Imagen:</label>
+                        <div class="col-sm-7">
+                            <input type="text" th:field="*{urlImagen}" class="form-control"
+                                placeholder="URL de la imagen del autor">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Biografía:</label>
+                        <div class="col-sm-7">
+                            <textarea th:field="*{biografia}" class="form-control"
+                                placeholder="Biografía del autor" rows="4"></textarea> 
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <label class="col-sm-3 control-label">Fecha de Nacimiento:</label>
+                        <div class="col-sm-7">
+                            <input type="date" th:field="*{fechaNacimiento}" class="form-control">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-offset-3 col-sm-7">
+                            <button type="submit" class="btn btn-success">Guardar</button>
+                            <a th:href="@{/admin/autores}" class="btn btn-default">Cancelar</a> 
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+	</div>
+
+	<script
+		src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>
+</body>
+</html>

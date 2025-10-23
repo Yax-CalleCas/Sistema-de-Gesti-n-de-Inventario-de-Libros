@@ -1,0 +1,92 @@
+<!-- fragments/footer_cliente.html -->
+<footer th:fragment="footer"
+	class="footer mt-5 text-center text-lg-start">
+	<style>
+.footer {
+	background-color: #FFC107;
+	color: #002B7F;
+	font-family: 'Poppins', sans-serif;
+	font-size: 0.95rem;
+	border-top: 3px solid #002B7F;
+}
+
+.footer .container {
+	padding: 40px 0;
+}
+
+.footer h6 {
+	font-weight: 700;
+	color: #002B7F;
+	text-transform: uppercase;
+	margin-bottom: 15px;
+}
+
+.footer a {
+	color: #002B7F;
+	text-decoration: none;
+	transition: color 0.3s ease;
+}
+
+.footer a:hover {
+	color: #0a4abf;
+}
+
+.footer .social-icons a {
+	font-size: 1.3rem;
+	margin: 0 8px;
+}
+
+.footer-bottom {
+	background-color: #002B7F;
+	color: #ffffff;
+	padding: 10px 0;
+	font-size: 0.9rem;
+}
+</style>
+
+	<div class="container text-center text-md-start">
+		<div class="row">
+			<!-- Columna 1 -->
+			<div class="col-md-3 mb-4">
+				<h6>Sobre BookFlow</h6>
+				<p>Tu librería online de confianza. Encuentra tus libros
+					favoritos al mejor precio, con envíos rápidos y seguros.</p>
+			</div>
+
+			<!-- Columna 2 -->
+			<div class="col-md-3 mb-4">
+				<h6>Atención al cliente</h6>
+				<ul class="list-unstyled">
+					<li><a href="#">Preguntas frecuentes</a></li>
+					<li><a href="#">Términos y condiciones</a></li>
+					<li><a href="#">Política de privacidad</a></li>
+				</ul>
+			</div>
+
+			<!-- Columna 3 -->
+			<div class="col-md-3 mb-4">
+				<h6>Contáctanos</h6>
+				<ul class="list-unstyled">
+					<li><i class="fa-solid fa-location-dot me-2"></i> Lima, Perú</li>
+					<li><i class="fa-solid fa-envelope me-2"></i>
+						soporte@bookflow.com</li>
+					<li><i class="fa-solid fa-phone me-2"></i> +51 987 654 321</li>
+				</ul>
+			</div>
+
+			<!-- Columna 4 -->  
+			<div class="col-md-3 mb-4">
+				<h6>Síguenos</h6>
+				<div class="social-icons">
+					<a href="#"><i class="fa-brands fa-facebook"></i></a> <a href="#"><i
+						class="fa-brands fa-instagram"></i></a> <a href="#"><i
+						class="fa-brands fa-x-twitter"></i></a> <a href="#"><i
+						class="fa-brands fa-youtube"></i></a>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div class="footer-bottom text-center">© 2025 BookFlow |
+		Desarrollado con 💙 por tu equipo de confianza</div>
+</footer>

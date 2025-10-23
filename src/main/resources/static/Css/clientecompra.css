@@ -1,0 +1,143 @@
+/* ==========================================================
+   BookFlow: Estilos Historial de Compras (Púrpura/Violeta)
+   ========================================================== */
+
+:root {
+    --primary-color: rgb(64, 0, 128);       /* Púrpura Oscuro (Texto y Foco) */
+    --secondary-color: rgb(128, 0, 255);    /* Púrpura Brillante (Encabezado de tabla) */
+    --success-color: #198754;               /* Verde estándar para Totales */
+    --bg-light: #f5f7fa;
+    --border-color: #e0e0e0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+    background-color: var(--bg-light);
+}
+
+/* 1. Encabezado y Título */
+.header-section {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    align-items: flex-start;
+    border-bottom: 2px solid var(--border-color);
+    padding-bottom: 20px;
+}
+
+@media (min-width: 768px) {
+    .header-section {
+        flex-direction: row;
+        align-items: center;
+    }
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 2rem;
+}
+
+/* Barra de Búsqueda */
+.search-box {
+    width: 100%;
+    max-width: 300px;
+}
+.form-control {
+    border-radius: 8px;
+    border: 1px solid #ced4da;
+    transition: border-color 0.2s, box-shadow 0.2s;
+}
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(128, 0, 255, 0.25);
+}
+
+/* 2. Mensaje de Tabla Vacía */
+.empty-message {
+    text-align: center;
+    padding: 50px;
+    border: 2px dashed var(--border-color);
+    border-radius: 10px;
+    background-color: #fff;
+    color: #888;
+    font-size: 1.1rem;
+    margin-top: 30px;
+}
+.empty-message strong {
+    color: var(--primary-color);
+}
+
+/* 3. Tabla de Compras */
+.table-responsive {
+    border-radius: 10px;
+    overflow: hidden;
+    border: 1px solid var(--border-color);
+}
+
+.table-compras {
+    background-color: #fff;
+    border-collapse: separate;
+    margin-bottom: 0;
+}
+
+.table-compras thead {
+    background-color: var(--secondary-color); /* Púrpura brillante */
+    color: white;
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.table-compras thead th {
+    padding: 12px 15px;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+
+.table-compras tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table-compras tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.table-compras tbody td {
+    padding: 12px 15px;
+    font-size: 0.95rem;
+}
+
+/* Estilo para el Total */
+.text-success {
+    color: var(--success-color) !important;
+}
+.text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* 4. Botones de Acción */
+.btn-sm {
+    padding: 5px 10px;
+    border-radius: 6px;
+    font-size: 0.9rem;
+}
+
+/* Botón Ver Detalle (Azul info para destacar) */
+.btn-outline-info {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-info:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* Botón Eliminar/Cancelar (Rojo) */
+.btn-outline-danger {
+    color: #dc3545;
+    border-color: #dc3545;
+}
+.btn-outline-danger:hover {
+    background-color: #dc3545;
+    color: white;
+}

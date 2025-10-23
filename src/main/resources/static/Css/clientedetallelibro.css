@@ -1,0 +1,39 @@
+.portada {
+	max-width: 100%;
+	height: auto;
+	border-radius: 12px;
+	box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.badge-descuento {
+	background-color: #ff4444;
+	color: white;
+	font-size: 0.9rem;
+	padding: 5px 10px;
+	border-radius: 8px;
+}
+
+.precio-final {
+	font-size: 1.5rem;
+	color: #109372;
+	font-weight: bold;
+}
+
+.precio-original {
+	text-decoration: line-through;
+	color: #888;
+	font-size: 1rem;
+	margin-left: 8px;
+}
+
+.descripcion {
+	font-size: 1rem;
+	color: #444;
+	text-align: justify;
+}
+
+.info-libro span {
+	font-weight: 500;
+	color: #555;
+	
+}

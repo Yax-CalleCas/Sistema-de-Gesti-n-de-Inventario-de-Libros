@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Panel del Cliente | Librería BookFlow</title>
+
+<!-- Estilos base -->
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+	rel="stylesheet">
+
+<link rel="stylesheet" th:href="@{/Css/clientePanel.css}">
+</head>
+
+<body>
+	<!-- Cabecera -->
+	<div th:replace="fragments/cliente_header :: header"></div>
+
+	<div class="container py-4">
+
+		<h2 class="mb-4 fw-bold">
+			Bienvenido, <span th:text="${usuario.nombre}"></span> 👋
+		</h2>
+
+		<!--  Resumen general -->
+		<div class="row g-3 mb-4 text-center">
+			<div class="col-md-4">
+				<div class="card p-3">
+					<i class="fa-solid fa-cart-shopping fa-2x mb-2"></i>
+					<h5 class="fw-semibold">Carrito</h5>
+					<h4 class="text-secondary" th:text="${cantidadCarrito}">0</h4>
+					<a href="/cliente/carrito"
+						class="btn btn-outline-primary btn-sm mt-2">Ver carrito</a>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card p-3">
+					<i class="fa-solid fa-receipt fa-2x mb-2"></i>
+					<h5 class="fw-semibold">Compras</h5>
+					<h4 class="text-secondary" th:text="${totalCompras}">0</h4>
+					<a href="/cliente/compras"
+						class="btn btn-outline-primary btn-sm mt-2">Ver historial</a>
+				</div>
+			</div>
+			<div class="col-md-4">
+				<div class="card p-3">
+					<i class="fa-solid fa-gift fa-2x mb-2"></i>
+					<h5 class="fw-semibold">Promociones</h5>
+					<h4 class="text-secondary" th:text="${totalPromociones}">0</h4>
+					<a href="/cliente/promociones"
+						class="btn btn-outline-primary btn-sm mt-2">Ver ofertas</a>
+				</div>
+			</div>
+		</div>
+
+
+
+		<!--  Libros recomendados -->
+		<h4 class="section-title mt-5 mb-3"> Libros recomendados</h4>
+<div class="row g-3">
+    <div class="col-md-3" 
+         th:each="libro : ${librosRecomendados.size() > 4 ? librosRecomendados.subList(0, 4) : librosRecomendados}">
+        <div class="card shadow-sm border-0 h-100">
+            <img
+                th:src="${libro.imagenUrl != null ? libro.imagenUrl : '/img/libro-default.jpg'}"
+                class="card-img-top" style="height: 250px; object-fit: cover;"
+                alt="Portada del libro">
+            <div class="card-body text-center">
+                <h6 th:text="${libro.titulo}" class="fw-bold text-primary"></h6>
+                <p class="text-muted small mb-1" th:text="${libro.autor.nombre}"></p>
+                <p class="price" th:text="'S/ ' + ${libro.precioFinal}"></p>
+                
+                <form th:action="@{/carrito/agregar/{id}(id=${libro.id})}"
+                    method="post" class="d-flex justify-content-center">
+                    <input type="number" name="cantidad" value="1" min="1" max="50"
+                        class="form-control form-control-sm text-center me-2"
+                        style="width: 70px;">
+                    <button type="submit" class="btn btn-success btn-sm"
+                        th:disabled="${libro.stock == 0}">
+                        <i class="fa-solid fa-cart-plus"></i> Agregar
+                    </button>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+		
+
+	<div th:replace="fragments/cliente_footer :: footer"></div>
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

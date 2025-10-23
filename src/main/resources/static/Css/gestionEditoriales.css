@@ -1,0 +1,76 @@
+/* ==========================================================
+   BookFlow: Estilos Gestión de Editoriales (Azul Púrpura)
+   ========================================================== */
+
+:root {
+    --primary-color: #400080;       /* Púrpura Oscuro (Principal) */
+    --secondary-color: #8A2BE2;     /* Púrpura Azulado (Acento) */
+    --primary-alt: #007bff;         /* Azul Brillante (Botón Añadir/Guardar) */
+    --primary-dark: #2c3e50;        /* Texto oscuro */
+    --bg-light: #f5f7fa;            /* Fondo general claro */
+}
+
+body {
+    background-color: var(--bg-light);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Título y Header --- */
+.page-title {
+	color: var(--primary-color) !important;
+	font-weight: 700;
+}
+
+.btn-accion {
+	border-radius: 50px; 
+	font-size: 0.85rem;
+	padding: 0.4rem 0.8rem;
+}
+
+/* Botón Guardar */
+.btn-primary-alt {
+	background-color: var(--primary-color); /* Usamos el color principal para Guardar */
+	border-color: var(--primary-color);
+	font-weight: 600;
+	color: white;
+}
+.btn-primary-alt:hover {
+	background-color: rgb(50, 0, 100);
+	border-color: rgb(30, 0, 60);
+}
+
+/* --- Tarjetas y Diseño de Formulario/Tabla --- */
+.card-gestion, .card-form {
+	border-radius: 15px;
+	border: none;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+/* Tarjeta de Formulario (Pegajosa) */
+.card-form {
+    top: 20px; /* Distancia desde la parte superior al hacer scroll */
+}
+
+/* Estilos de tabla (Se mantienen) */
+.table-editoriales thead {
+	background-color: var(--primary-color) !important;
+	color: #fff;
+	font-weight: 600;
+    font-size: 0.95rem;
+}
+/* ... otros estilos de tabla y botones de acción ... */
+.btn-accion:not(.btn-outline-secondary) {
+	border-radius: 50%; 
+	font-size: 0.9rem;
+	padding: 0.5rem 0.5rem;
+    line-height: 1;
+}
+
+.btn-outline-warning {
+    color: #f39c12;
+    border-color: #f39c12;
+}
+.btn-outline-warning:hover {
+    background-color: #f39c12;
+    color: white;
+}

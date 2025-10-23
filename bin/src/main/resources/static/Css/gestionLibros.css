@@ -1,0 +1,100 @@
+/* ==========================================================
+   BookFlow: Estilos Gestión de Libros (Azul Púrpura)
+   ========================================================== */
+
+:root {
+    --primary-color: #400080;       /* Púrpura Oscuro (Principal) */
+    --secondary-color: #8A2BE2;     /* Púrpura Azulado (Acento) */
+    --primary-alt: #007bff;         /* Azul Brillante (Botón Añadir) */
+    --primary-dark: #2c3e50;        /* Texto oscuro */
+    --bg-light: #f5f7fa;            /* Fondo general claro */
+}
+
+body {
+    background-color: var(--bg-light);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Título y Header --- */
+.page-title {
+	color: var(--primary-color) !important;
+	font-weight: 700;
+}
+
+.header-gestion .btn-outline-secondary {
+    border-radius: 50px;
+}
+
+/* Botón Añadir (Azul para diferenciar de los botones de acción) */
+.btn-primary-alt {
+	background-color: var(--primary-alt);
+	border-color: var(--primary-alt);
+	font-weight: 600;
+	color: white;
+    border-radius: 50px;
+}
+.btn-primary-alt:hover {
+	background-color: #0056b3;
+	border-color: #0056b3;
+}
+
+/* --- Tarjeta y Tabla --- */
+.card-inventario {
+	border-radius: 15px;
+	border: none;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.table-libros thead {
+	background-color: var(--primary-color) !important;
+	color: #fff;
+	font-weight: 600;
+    font-size: 0.95rem;
+}
+.table-libros thead th {
+    border-bottom: none;
+}
+
+.table-libros tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table-libros tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+/* Imagen de Portada */
+.cover-img {
+	width: 40px;
+	height: 60px;
+	object-fit: cover;
+	border-radius: 4px;
+    border: 1px solid #ddd;
+}
+
+/* --- Precios y Stock --- */
+.text-primary-dark {
+    color: var(--primary-dark) !important;
+}
+
+/* Descuento */
+.text-danger.fw-bold {
+    color: #e74c3c !important; /* Rojo estándar */
+}
+
+/* Acciones */
+.btn-accion {
+	border-radius: 50%; /* Botones circulares */
+	font-size: 0.9rem;
+	padding: 0.5rem 0.5rem;
+    line-height: 1;
+}
+
+.btn-outline-warning {
+    color: #f39c12;
+    border-color: #f39c12;
+}
+.btn-outline-warning:hover {
+    background-color: #f39c12;
+    color: white;
+}

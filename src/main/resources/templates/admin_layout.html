@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Panel de Administrador</title>
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+<style>
+body {
+	padding-top: 70px;
+}
+
+.sidebar {
+	height: 100%;
+	padding-top: 20px;
+}
+
+.active {
+	font-weight: bold;
+	background-color: #f0f0f0;
+}
+</style>
+</head>
+<body>
+	<nav class="navbar navbar-inverse navbar-fixed-top">
+		<div class="container">
+			<div class="navbar-header">
+				<a class="navbar-brand" th:href="@{/admin}">Admin Panel</a>
+			</div>
+		</div>
+	</nav>
+
+	<div class="container-fluid">
+		<div class="row">
+			<!-- Sidebar -->
+			<div class="col-sm-3 col-md-2 sidebar">
+				<div class="list-group">
+					<a th:href="@{/admin/usuarios}"
+						th:classappend="${activePage=='usuarios'} ? 'active'"
+						class="list-group-item">Gestión de Usuarios</a> <a
+						th:href="@{/admin/roles}"
+						th:classappend="${activePage=='roles'} ? 'active'"
+						class="list-group-item">Gestión de Roles</a> <a
+						th:href="@{/admin/reportes}"
+						th:classappend="${activePage=='reportes'} ? 'active'"
+						class="list-group-item">Reportes</a> <a
+						th:href="@{/admin/configuracion}"
+						th:classappend="${activePage=='configuracion'} ? 'active'"
+						class="list-group-item">Configuración</a>
+				</div>
+			</div>
+
+			<!-- Main Content -->
+			<div class="col-sm-9 col-md-10 main">
+				<h3 th:text="'¡Bienvenido, ' + ${usuario.nombre} + '!'"></h3>
+				<div th:replace="${content}"></div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

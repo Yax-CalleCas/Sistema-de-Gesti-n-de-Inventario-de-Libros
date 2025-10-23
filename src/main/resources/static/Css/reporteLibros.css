@@ -1,0 +1,131 @@
+
+
+:root {
+    --purple-dark: rgb(64, 0, 128);       /* Púrpura oscuro para títulos y texto principal */
+    --purple-light: rgb(128, 0, 255);     /* Púrpura brillante para encabezados de tabla */
+    --bg-light: #f9fafc;                  /* Fondo gris muy claro */
+    --border-color: #e0e0e0;              /* Borde sutil */
+    --hover-color: #f0f0f0;               /* Fondo al pasar el ratón */
+}
+
+/* 1. Generales y Animación */
+body {
+    background-color: var(--bg-light); 
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+.container {
+    animation: fadeIn 0.8s ease-in-out;
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; transform: translateY(10px); }
+    to { opacity: 1; transform: translateY(0); }
+}
+
+h2 {
+    color: var(--purple-dark);
+    font-weight: 700;
+}
+
+/* 2. Tabla de Reporte */
+
+.table-responsive {
+    /* Usamos el borde y sombra del estilo Púrpura */
+    border-radius: 12px;
+    overflow: hidden; 
+    border: 1px solid var(--border-color);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+}
+
+.table {
+    background-color: #fff;
+    /* Mantener box-shadow aquí no es necesario si se usa en .table-responsive */
+    border-collapse: separate;
+    border-spacing: 0;
+}
+
+.table thead tr {
+    /* Aplicamos el color Púrpura */
+    background-color: var(--purple-light);
+    color: #fff;
+    letter-spacing: 0.5px;
+}
+
+.table thead th {
+    padding: 12px 10px;
+    vertical-align: middle;
+    text-transform: uppercase;
+    font-size: 0.9rem;
+    font-weight: 600; /* Asegurar negrita */
+}
+
+.table tbody tr {
+    transition: background-color 0.2s ease-in-out;
+}
+
+.table tbody tr:hover {
+    background-color: var(--hover-color); /* Usamos el gris claro definido */
+}
+
+.table tbody td {
+    vertical-align: middle;
+    padding: 10px;
+    font-size: 0.9rem;
+}
+
+.table img {
+    /* Estilo de imagen de portada mejorado */
+    width: 50px; /* Tamaño más compacto para reportes */
+    height: 70px; 
+    object-fit: cover;
+    border-radius: 4px;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.1);
+    border: 1px solid #ddd;
+}
+
+/* 3. Botones */
+
+.btn {
+    border-radius: 8px;
+    padding: 8px 14px;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s ease-in-out;
+}
+
+.btn i {
+    margin-right: 6px;
+}
+
+.btn-danger {
+    /* Estilo para el botón PDF (rojo, pero pulido) */
+    background-color: #dc3545;
+    border: 1px solid #dc3545; /* Añadimos un borde sólido */
+}
+
+.btn-danger:hover {
+    background-color: #bb2d3b;
+    border-color: #a71d2a;
+    transform: translateY(-1px);
+}
+
+/* 4. Pie de Página */
+
+footer {
+    text-align: center;
+    margin-top: 30px;
+    padding-top: 20px;
+    border-top: 1px solid var(--border-color);
+    color: #888; /* Color suave para el texto */
+    font-size: 0.85rem;
+}
+
+footer strong {
+    color: var(--purple-dark); /* Destacamos el nombre del sistema en púrpura */
+}
+
+.text-muted {
+    color: #6c757d !important;
+}

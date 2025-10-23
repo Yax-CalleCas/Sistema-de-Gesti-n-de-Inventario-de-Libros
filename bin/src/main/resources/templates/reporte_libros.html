@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<title>Reporte de Libros | BookFlow</title>
+
+<!-- Bootstrap 5 -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+<!-- Íconos Bootstrap -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css" rel="stylesheet">
+<link rel="stylesheet" th:href="@{/Css/reporteLibros.css}">
+
+</head>
+<body>
+
+<div class="container mt-5">
+
+    <!-- Encabezado -->
+    <div class="d-flex justify-content-between align-items-center mb-4">
+        <h2 class="mb-0">
+            <i class="bi bi-journal-bookmark-fill me-2"></i>Reporte de Libros
+        </h2>
+        <div>
+            <a th:href="@{/admin/reportes/libros/pdf}" class="btn btn-danger btn-sm shadow-sm">
+                <i class="bi bi-file-earmark-pdf"></i> Descargar PDF
+            </a>
+        </div>
+    </div>
+
+    <!-- Tabla -->
+    <div class="table-responsive shadow-sm">
+        <table class="table table-bordered align-middle text-center">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>ISBN</th>
+                    <th>Título</th>
+                    <th>Autor</th>
+                    <th>Categoría</th>
+                    <th>Editorial</th>
+                    <th>Precio (S/.)</th>
+                    <th>Descuento (%)</th>
+                    <th>Stock</th>
+                    <th>Fecha Publicación</th>
+                    <th>Imagen</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="libro : ${libros}">
+                    <td th:text="${libro.id}"></td>
+                    <td th:text="${libro.isbn}"></td>
+                    <td th:text="${libro.titulo}"></td>
+                    <td th:text="${libro.autor.nombre}"></td>
+                    <td th:text="${libro.categoria.nombre}"></td>
+                    <td th:text="${libro.editorial.nombre}"></td>
+                    <td th:text="${#numbers.formatDecimal(libro.precio, 1, 2)}"></td>
+                    <td th:text="${libro.descuento != null ? libro.descuento : 0}"></td>
+                    <td th:text="${libro.stock}"></td>
+                    <td th:text="${libro.fechaPublicacion}"></td>
+                    <td>
+                        <img th:if="${libro.imagenUrl != null}" th:src="${libro.imagenUrl}" alt="Imagen del libro">
+                        <span th:if="${libro.imagenUrl == null}" class="text-muted fst-italic">Sin imagen</span>
+                    </td>
+                </tr>
+                <tr th:if="${#lists.isEmpty(libros)}">
+                    <td colspan="11" class="text-center text-muted py-3">
+                        <i class="bi bi-exclamation-circle"></i> No hay libros registrados en el sistema.
+                    </td>
+                </tr>
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Descripción -->
+    <div class="mt-4">
+        <p class="text-muted">
+            Este reporte muestra todos los libros registrados en la base de datos del sistema
+            <strong>BookFlow</strong>. Desde aquí puedes descargar los reportes en formato
+            <strong>PDF</strong> con toda la información detallada de los libros, incluyendo
+            imágenes, precios y stock disponible.
+        </p>
+    </div>
+
+    <footer>
+        <p>Reporte generado automáticamente por <strong>BookFlow © 2025</strong></p>
+    </footer>
+</div>
+
+<!-- Bootstrap JS -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

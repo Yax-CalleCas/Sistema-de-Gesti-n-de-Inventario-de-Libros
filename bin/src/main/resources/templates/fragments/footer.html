@@ -1,0 +1,35 @@
+<!-- fragments/footer.html -->
+<footer th:fragment="siteFooter" class="footer bg-light border-top mt-5 py-3">
+    <div class="container d-flex flex-column flex-md-row justify-content-between align-items-center text-center text-md-start">
+        
+        <!-- Texto principal -->
+        <div class="text-muted small mb-2 mb-md-0">
+            <i class="bi bi-book-half me-2"></i>
+            Sistema <strong>BookFlow</strong> © <span id="year">2025</span> — Desarrollado por <strong>Yaxon Calle</strong>
+        </div>
+
+        <!-- Iconos sociales -->
+        <div class="d-flex justify-content-center gap-3">
+            <a href="https://facebook.com" target="_blank" class="text-decoration-none text-primary" title="Facebook">
+                <i class="bi bi-facebook fs-5"></i>
+            </a>
+            <a href="https://instagram.com" target="_blank" class="text-decoration-none text-danger" title="Instagram">
+                <i class="bi bi-instagram fs-5"></i>
+            </a>
+            <a href="https://wa.me/51999999999" target="_blank" class="text-decoration-none text-success" title="WhatsApp">
+                <i class="bi bi-whatsapp fs-5"></i>
+            </a>
+            <a href="mailto:yaxon.calle@example.com" class="text-decoration-none text-secondary" title="Correo">
+                <i class="bi bi-envelope-fill fs-5"></i>
+            </a>
+        </div>
+    </div>
+</footer>
+
+<!-- Script para año dinámico -->
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+      const year = new Date().getFullYear();
+      document.getElementById("year").textContent = year;
+  });
+</script>

@@ -1,0 +1,64 @@
+/* ==========================================================
+   BookFlow: Estilos Formulario Gestión de Libros (Azul Púrpura)
+   ========================================================== */
+
+:root {
+    --primary-color: #400080;       /* Púrpura Oscuro (Principal) */
+    --secondary-color: #8A2BE2;     /* Púrpura Azulado (Acento) */
+    --primary-dark: #2c3e50;        /* Texto oscuro */
+    --bg-light: #f5f7fa;            /* Fondo general claro */
+}
+
+body {
+    background-color: var(--bg-light);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Card Principal --- */
+.form-card {
+	border-radius: 15px;
+	border: none;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header.bg-primary {
+	background-color: var(--primary-color) !important;
+	color: white;
+	font-weight: 600;
+	border-radius: 15px 15px 0 0;
+}
+
+/* --- Formulario y Controles --- */
+.form-label {
+    color: var(--primary-dark);
+}
+
+/* Campos de entrada */
+.form-control:focus, .form-select:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(138, 43, 226, 0.25); /* Sombra púrpura */
+}
+
+/* Títulos de sección dentro del formulario */
+h6.text-primary-dark {
+    color: var(--primary-color) !important;
+}
+
+/* --- Botones --- */
+.btn-primary-custom {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+	font-weight: 600;
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+}
+
+.btn-primary-custom:hover {
+	background-color: rgb(50, 0, 100);
+	border-color: rgb(30, 0, 60);
+}
+
+.btn-outline-secondary {
+    padding: 0.7rem 1.5rem;
+    border-radius: 8px;
+}

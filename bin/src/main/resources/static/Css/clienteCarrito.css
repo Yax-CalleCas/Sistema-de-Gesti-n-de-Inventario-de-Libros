@@ -1,0 +1,102 @@
+/* ==========================================================
+   BookFlow: Estilos Carrito de Compras (Púrpura/Violeta)
+   ========================================================== */
+
+:root {
+    --primary-color: rgb(64, 0, 128);       /* Púrpura Oscuro (Botón, Total) */
+    --secondary-color: rgb(128, 0, 255);    /* Púrpura Brillante (Acentos) */
+    --bg-light: #f5f7fa;
+    --border-color: #e0e0e0;
+}
+
+body {
+    font-family: 'Montserrat', sans-serif;
+}
+
+/* --- Estilos Generales --- */
+.text-primary { color: var(--primary-color) !important; }
+.btn-primary { 
+    background-color: var(--primary-color) !important;
+    border-color: var(--primary-color) !important;
+    transition: all 0.2s;
+}
+.btn-primary:hover {
+    background-color: rgb(50, 0, 100) !important;
+    border-color: rgb(30, 0, 60) !important;
+}
+.btn-outline-primary {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+}
+.btn-outline-primary:hover {
+    background-color: var(--primary-color);
+    color: white;
+}
+
+/* --- 1. Header y Título --- */
+.header-carrito h2 {
+    font-size: 2rem;
+}
+.header-carrito .border-bottom {
+    border-color: #ddd !important;
+}
+
+/* --- 2. Carrito Vacío --- */
+.empty-cart {
+    background-color: #fff;
+    border: 2px dashed #e0e0e0;
+}
+.empty-cart .fa-box-open {
+    color: #ccc;
+}
+
+/* --- 3. Tabla de Artículos --- */
+.card {
+    border-radius: 10px;
+}
+
+.table-carrito thead {
+    background-color: var(--secondary-color) !important;
+    color: white;
+}
+
+.table-carrito tbody tr td {
+    padding-top: 15px;
+    padding-bottom: 15px;
+}
+
+/* Miniatura del Libro */
+.book-thumb {
+    width: 50px;
+    height: 70px;
+    object-fit: contain;
+    border: 1px solid #eee;
+    border-radius: 4px;
+}
+
+/* Control de Cantidad (Estilo para el input en el td) */
+.quantity-control input {
+    max-width: 60px;
+    margin: auto;
+}
+
+/* --- 4. Resumen y Checkout (Columna Derecha) --- */
+.sticky-summary {
+    position: sticky;
+    top: 20px; /* Distancia desde la parte superior */
+    border-radius: 10px;
+    border-left: 4px solid var(--primary-color); /* Borde para destacar */
+}
+
+/* Selección de Método de Pago */
+.form-select.border-primary {
+    border-color: var(--primary-color) !important;
+}
+.form-select.border-primary:focus {
+    box-shadow: 0 0 0 0.25rem rgba(64, 0, 128, 0.25);
+}
+
+/* Botón Finalizar Compra */
+.finalizar-compra-btn {
+    font-weight: 700;
+}

@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Detalle de Compra | Librería BookFlow</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css"
+	rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/Css/clientedetalle.css}">
+
+</head>
+<body class="bg-light">
+
+	<div class="container py-5">
+
+		<div class="d-flex justify-content-between align-items-center mb-4 pb-3 border-bottom header-title-section">
+			<h2 class="titulo-principal mb-0">
+				<i class="bi bi-receipt me-2"></i> Detalle de Compra N° <span th:text="${venta.id}"></span>
+			</h2>
+			<a th:href="@{/cliente/compras}" class="btn btn-outline-primary btn-sm">
+				<i class="bi bi-arrow-left me-1"></i> Volver al historial
+			</a>
+		</div>
+
+		<div class="row g-4">
+			<div class="col-lg-4">
+				<div class="card card-info shadow-sm h-100 p-3">
+					<h5 class="card-title fw-bold text-primary mb-3"><i class="bi bi-info-circle me-2"></i> Información de la Transacción</h5>
+					<p class="mb-2">
+						<span class="fw-semibold">Cliente:</span> <span th:text="${venta.usuario.nombre + ' ' + venta.usuario.apellido}"></span>
+					</p>
+					<p class="mb-2">
+						<span class="fw-semibold">Fecha:</span> <span
+							th:text="${#temporals.format(venta.fecha, 'dd/MM/yyyy HH:mm')}"></span>
+					</p>
+					<p class="mb-2">
+						<span class="fw-semibold">Método de Pago:</span> <span
+							th:text="${venta.metodoPago}"></span>
+					</p>
+					</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="card card-total shadow-sm h-100 p-3 bg-primary text-white">
+					<h5 class="card-title fw-bold mb-3"><i class="bi bi-currency-dollar me-2"></i> Total de la Compra</h5>
+					<div class="d-flex justify-content-between align-items-end">
+						<p class="fs-6 fw-normal mb-0">TOTAL FINAL:</p>
+						<h2 class="fw-bold mb-0">
+							S/ <span th:text="${#numbers.formatDecimal(venta.calcularTotal(), 1, 2)}"></span>
+						</h2>
+					</div>
+				</div>
+			</div>
+			
+			<div class="col-lg-4">
+			    <div class="card card-download shadow-sm h-100 p-3">
+			        <h5 class="card-title fw-bold text-success mb-3"><i class="bi bi-file-earmark-pdf me-2"></i> Documento</h5>
+			        <p class="text-muted small">Genera tu comprobante de compra en formato PDF.</p>
+			        <a th:href="@{'#' + ${venta.id}}" 
+			           class="btn btn-success btn-block mt-auto">
+			            <i class="bi bi-download me-2"></i> Descargar Factura
+			        </a>
+			    </div>
+			</div>
+
+		</div>
+        
+        <h4 class="fw-bold mt-5 mb-3 section-title-details"><i class="bi bi-book me-2"></i>Detalle de Libros Adquiridos</h4>
+        
+        <div class="table-responsive">
+            <table class="table table-hover align-middle table-striped table-bordered shadow-sm">
+                <thead class="table-primary text-white">
+                    <tr>
+                        <th scope="col" class="text-center">#</th>
+                        <th scope="col" colspan="2">Libro</th>
+                        <th scope="col" class="text-end">Precio Unitario (S/)</th>
+                        <th scope="col" class="text-center">Cantidad</th>
+                        <th scope="col" class="text-center">Descuento</th>
+                        <th scope="col" class="text-end">Subtotal (S/)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="d, stat : ${venta.detalles}">
+                        <td class="text-center" th:text="${stat.index + 1}">1</td>
+                        <td style="width: 80px;">
+                            <img th:src="${d.libro.imagenUrl != null ? d.libro.imagenUrl : '/img/libro-default.jpg'}" 
+                                 alt="Portada" class="img-fluid book-cover-thumb">
+                        </td>
+                        <td>
+                            <div class="fw-semibold" th:text="${d.libro.titulo}"></div>
+                            <span class="text-muted small" th:text="${d.libro.autor.nombre}"></span>
+                        </td>
+                        <td class="text-end" th:text="${#numbers.formatDecimal(d.precioUnitario, 1, 2)}">19.99</td>
+                        <td class="text-center" th:text="${d.cantidad}">1</td>
+                        <td class="text-center">
+                            <span th:if="${d.libro.descuento != null && d.libro.descuento > 0}" 
+                                  class="badge bg-danger" th:text="${#numbers.formatDecimal(d.libro.descuento * 100, 0, 0) + '%'}">15%</span>
+                            <span th:unless="${d.libro.descuento != null && d.libro.descuento > 0}" class="text-muted">-</span>
+                        </td>
+                        <td class="text-end fw-bold text-success" th:text="${#numbers.formatDecimal(d.subtotal, 1, 2)}">16.99</td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+        
+        <div class="mt-4 p-3 bg-white shadow-sm rounded-3">
+            <p class="mb-0 text-muted small"><i class="bi bi-info-circle me-2"></i>La facturación fue generada al momento de la compra.</p>
+        </div>
+
+	</div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+</body>
+</html>

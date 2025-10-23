@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title th:text="${libro.id != null ? 'Editar Libro' : 'Nuevo Libro'}">Formulario Libro</title>
+
+    <!-- Bootstrap & FontAwesome -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/adminLibros.css}">
+
+</head>
+<body class="container py-5">
+
+    <h2 class="text-center mb-4">
+        <i class="fa-solid fa-pen-to-square me-2"></i>
+        <span th:text="${libro.id != null ? 'Editar Libro' : 'Registrar Nuevo Libro'}"></span>
+    </h2>
+
+    <div class="card shadow p-4">
+        <form th:action="@{/admin/libros/guardar}" th:object="${libro}" method="post" class="row g-3">
+            <input type="hidden" th:field="*{id}" />
+
+            <!-- Columna izquierda -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-book"></i> Título</label>
+                <input type="text" th:field="*{titulo}" class="form-control" required>
+
+                <label class="form-label mt-3"><i class="fa-solid fa-align-left"></i> Descripción</label>
+                <textarea th:field="*{descripcion}" class="form-control" rows="3"></textarea>
+
+                <label class="form-label mt-3"><i class="fa-solid fa-money-bill"></i> Precio</label>
+                <input type="number" step="0.01" th:field="*{precio}" class="form-control" required>
+
+                <label class="form-label mt-3"><i class="fa-solid fa-percent"></i> Descuento (%)</label>
+                <input type="number" step="0.01" th:field="*{descuento}" class="form-control" placeholder="Ej: 0.15 para 15%">
+
+                <label class="form-label mt-3"><i class="fa-solid fa-layer-group"></i> Stock</label>
+                <input type="number" th:field="*{stock}" class="form-control" required>
+
+                <label class="form-label mt-3"><i class="fa-solid fa-image"></i> Imagen (URL)</label>
+                <input type="url" th:field="*{imagenUrl}" class="form-control" placeholder="https://...">
+            </div>
+
+            <!-- Columna derecha -->
+            <div class="col-md-6">
+                <label class="form-label"><i class="fa-solid fa-barcode"></i> ISBN</label>
+                <input type="text" th:field="*{isbn}" class="form-control">
+
+                <label class="form-label mt-3"><i class="fa-solid fa-calendar"></i> Fecha Publicación</label>
+                <input type="date" th:field="*{fechaPublicacion}" class="form-control">
+
+                <label class="form-label mt-3"><i class="fa-solid fa-language"></i> Idioma</label>
+                <input type="text" th:field="*{idioma}" class="form-control">
+
+                <label class="form-label mt-3"><i class="fa-solid fa-bookmark"></i> Número de Páginas</label>
+                <input type="number" th:field="*{numeroPaginas}" class="form-control">
+
+                <label class="form-label mt-3"><i class="fa-solid fa-list"></i> Categoría</label>
+                <select th:field="*{categoria}" class="form-select" required>
+                    <option value="">-- Selecciona una categoría --</option>
+                    <option th:each="cat : ${categorias}" th:value="${cat.id}" th:text="${cat.nombre}"></option>
+                </select>
+
+                <label class="form-label mt-3"><i class="fa-solid fa-user-pen"></i> Autor</label>
+                <select th:field="*{autor}" class="form-select" required>
+                    <option value="">-- Selecciona un autor --</option>
+                    <option th:each="aut : ${autores}" th:value="${aut.id}" th:text="${aut.nombre}"></option>
+                </select>
+
+                <label class="form-label mt-3"><i class="fa-solid fa-building"></i> Editorial</label>
+                <select th:field="*{editorial}" class="form-select" required>
+                    <option value="">-- Selecciona una editorial --</option>
+                    <option th:each="ed : ${editoriales}" th:value="${ed.id}" th:text="${ed.nombre}"></option>
+                </select>
+
+                <label class="form-label mt-3"><i class="fa-solid fa-truck"></i> Proveedor</label>
+                <select th:field="*{proveedor}" class="form-select" required>
+                    <option value="">-- Selecciona un proveedor --</option>
+                    <option th:each="prov : ${proveedores}" th:value="${prov.id}" th:text="${prov.nombre}"></option>
+                </select>
+            </div>
+
+            <div class="col-12 text-center mt-4">
+                <button type="submit" class="btn btn-primary px-4">
+                    <i class="fa-solid fa-floppy-disk"></i> Guardar
+                </button>
+                <a th:href="@{/admin/libros}" class="btn btn-secondary px-4">
+                    <i class="fa-solid fa-arrow-left"></i> Volver
+                </a>
+            </div>
+        </form>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>

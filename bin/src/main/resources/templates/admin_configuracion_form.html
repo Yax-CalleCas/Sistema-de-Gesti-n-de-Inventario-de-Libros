@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+<meta charset="UTF-8">
+<title>Editar Configuración</title>
+<link rel="stylesheet" th:href="@{/css/bootstrap.min.css}">
+</head>
+<body>
+	<div class="container mt-4">
+
+		<h2 class="mb-4">Editar Configuración</h2>
+
+		<form
+			th:action="@{'/admin/configuracion/actualizar/' + ${configuracion.id}}"
+			th:object="${configuracion}" method="post">
+
+			<div class="mb-3">
+				<label class="form-label">Clave</label> <input type="text"
+					th:field="*{clave}" class="form-control" required>
+			</div>
+
+			<div class="mb-3">
+				<label class="form-label">Valor</label> <input type="text"
+					th:field="*{valor}" class="form-control" required>
+			</div>
+
+			<button type="submit" class="btn btn-primary">Actualizar</button>
+			<a th:href="@{/admin/configuracion}" class="btn btn-secondary">Cancelar</a>
+		</form>
+
+	</div>
+</body>
+</html>

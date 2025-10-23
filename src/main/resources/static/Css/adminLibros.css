@@ -1,0 +1,176 @@
+/* adminLibros.css */
+
+/* 1. Fondo del Cuerpo */
+body {
+    background-color: #f9fafc; /* Fondo gris muy claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333; /* Texto oscuro para buena lectura */
+}
+
+/* 2. Títulos */
+h2 {
+    color: rgb(64, 0, 128); /* Púrpura oscuro para el título principal */
+    font-weight: 700;
+}
+
+/* 3. Botones de Acción Global (Nuevo Libro y Volver) */
+.btn-success {
+    background-color: rgb(64, 0, 128); /* Púrpura oscuro */
+    border-color: rgb(50, 0, 100);
+    transition: all 0.3s;
+}
+
+.btn-success:hover {
+    background-color: rgb(50, 0, 100);
+    border-color: rgb(30, 0, 60);
+    transform: translateY(-2px); /* Pequeño efecto 3D */
+}
+
+.btn-outline-secondary {
+    color: rgb(128, 0, 255); /* Púrpura brillante */
+    border-color: rgb(128, 0, 255);
+    transition: all 0.3s;
+}
+
+.btn-outline-secondary:hover {
+    background-color: rgb(128, 0, 255);
+    color: #fff;
+}
+
+/* 4. Estilo de la Tabla */
+
+/* Contenedor de la tabla */
+.table-responsive {
+    border-radius: 12px;
+    overflow: hidden; /* Asegura que el borde redondeado se aplique bien */
+    border: 1px solid #e0e0e0;
+}
+
+/* Encabezado de la tabla */
+.table thead {
+    background-color: rgb(128, 0, 255); /* Púrpura más claro */
+    color: white; /* Texto blanco */
+    font-weight: 600;
+    font-size: 0.95rem;
+}
+
+/* Filas del cuerpo de la tabla */
+.table tbody tr {
+    transition: background-color 0.2s;
+}
+
+.table tbody tr:hover {
+    background-color: #f0f0f0; /* Fondo gris claro al pasar el ratón */
+}
+
+/* 5. Columnas Específicas */
+
+/* Título del libro */
+.text-primary {
+    color: rgb(64, 0, 128) !important;
+}
+
+/* Precio (ajuste solo para Bootstrap 5 si fuera necesario, pero la clase 'text-success' está bien) */
+
+/* Badge de Stock (ajuste sutil) */
+.badge {
+    padding: 0.5em 0.8em;
+    font-size: 0.8em;
+    font-weight: 700;
+    border-radius: 0.3rem;
+}
+
+/* 6. Botones de Acción en la Fila */
+.btn-info {
+    /* Mantenemos el azul de Bootstrap para diferenciarlos ligeramente o puedes usar: */
+    background-color: rgb(100, 50, 180); /* Púrpura intermedio */
+    border-color: rgb(80, 40, 160);
+}
+
+.btn-info:hover {
+    background-color: rgb(80, 40, 160);
+    border-color: rgb(60, 30, 130);
+}
+
+.btn-danger {
+    /* Mantener rojo para la acción de eliminar es una buena práctica de UX */
+    background-color: #dc3545; 
+    border-color: #dc3545;
+}
+
+/* Footer */
+footer {
+    text-align: center;
+    margin-top: 40px;
+    padding-top: 20px;
+    border-top: 1px solid #e0e0e0;
+    color: #888;
+    font-size: 0.85rem;
+}
+/* Estilos específicos para el Formulario de Libro (Basado en la paleta Púrpura/Violeta) */
+
+/* Fondo del Cuerpo */
+body {
+    background-color: #f9fafc; /* Fondo gris muy claro */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    color: #333;
+}
+
+/* Título Principal */
+h2 {
+    color: rgb(64, 0, 128); /* Púrpura oscuro para el título principal */
+    font-weight: 700;
+}
+
+/* Estilo de la Tarjeta (Card) */
+.card {
+    border: 1px solid #e0e0e0; /* Borde gris claro */
+    border-radius: 12px; /* Esquinas redondeadas */
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); /* Sombra más pronunciada */
+}
+
+/* Labels del Formulario */
+.form-label {
+    color: rgb(64, 0, 128); /* Púrpura oscuro para los títulos de los campos */
+    font-weight: 600;
+    margin-bottom: 5px;
+}
+
+.form-label i {
+    color: rgb(128, 0, 255); /* Iconos en púrpura brillante */
+    margin-right: 5px;
+}
+
+/* Botón Primario (Guardar) */
+.btn-primary {
+    background-color: rgb(64, 0, 128); /* Púrpura oscuro */
+    border-color: rgb(50, 0, 100);
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.btn-primary:hover, .btn-primary:focus {
+    background-color: rgb(50, 0, 100);
+    border-color: rgb(30, 0, 60);
+    transform: translateY(-1px);
+}
+
+/* Botón Secundario (Volver/Cancelar) */
+.btn-secondary {
+    background-color: #fff; /* Fondo blanco */
+    color: rgb(128, 0, 255); /* Texto púrpura brillante */
+    border: 1px solid rgb(128, 0, 255);
+    transition: all 0.3s;
+    font-weight: 600;
+}
+
+.btn-secondary:hover {
+    background-color: rgb(128, 0, 255);
+    color: #fff;
+    border-color: rgb(100, 0, 200);
+}
+
+/* Estilo para los campos de selección */
+.form-select:required:invalid {
+    color: #999; 
+}

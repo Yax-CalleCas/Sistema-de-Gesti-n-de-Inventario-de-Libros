@@ -1,0 +1,73 @@
+/* ==========================================================
+   BookFlow: Estilos Perfil Trabajador (Azul Púrpura)
+   ========================================================== */
+
+:root {
+    --primary-color: #400080;       /* Púrpura Oscuro (Principal) */
+    --secondary-color: #8A2BE2;     /* Púrpura Azulado (Acento) */
+    --primary-dark: #2c3e50;        /* Texto oscuro */
+    --bg-light: #f5f7fa;            /* Fondo general claro */
+    --warning-dark: #cc8400;        /* Para el label de contraseña */
+}
+
+body {
+	background-color: var(--bg-light);
+	font-family: 'Poppins', sans-serif;
+}
+
+.card-perfil {
+	border-radius: 15px;
+	border: none;
+	box-shadow: 0 8px 30px rgba(0, 0, 0, 0.15);
+}
+
+.card-header.bg-primary {
+	background-color: var(--primary-color) !important;
+	color: white;
+	font-weight: 600;
+	border-radius: 15px 15px 0 0;
+}
+
+.page-title, .text-primary {
+    color: var(--primary-color) !important;
+}
+
+/* --- Imagen de Perfil --- */
+.profile-img-container {
+	text-align: center;
+	margin-bottom: 25px;
+}
+.profile-img {
+	width: 140px;
+	height: 140px;
+	border-radius: 50%;
+	object-fit: cover;
+	border: 5px solid white;
+	box-shadow: 0 0 15px rgba(0, 0, 0, 0.15);
+}
+
+/* --- Formulario y Botones --- */
+.form-control:focus {
+    border-color: var(--secondary-color);
+    box-shadow: 0 0 0 0.25rem rgba(138, 43, 226, 0.25);
+}
+
+.text-warning-dark {
+    color: var(--warning-dark) !important;
+}
+
+.btn-primary-custom {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+	font-weight: 600;
+    padding: 0.7rem 1.5rem;
+}
+
+.btn-primary-custom:hover {
+	background-color: rgb(50, 0, 100);
+	border-color: rgb(30, 0, 60);
+}
+
+.btn-lg {
+    border-radius: 8px;
+}

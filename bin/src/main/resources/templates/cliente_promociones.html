@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Promociones | Librería BookFlow</title>
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/Css/promociones.css}">
+</head>
+<body class="bg-light">
+	<div class="container py-5">
+		
+		<h2 class="titulo-principal fw-bold mb-4 pb-2 border-bottom">
+			<i class="bi bi-gift-fill me-2"></i> Oportunidades Únicas
+		</h2>
+		
+		<div th:if="${#lists.isEmpty(promociones)}" class="alert alert-info text-center py-4">
+			No hay promociones activas en este momento. Vuelve pronto para ver nuestras ofertas.
+		</div>
+
+		<div th:unless="${#lists.isEmpty(promociones)}" class="row g-4">
+			
+			<div class="col-6 col-sm-4 col-md-3 col-lg-2" th:each="libro : ${promociones}">
+				<div class="card book-card border-0 shadow-lg h-100 p-2">
+					
+					<figure class="img-container">
+						<img th:src="${libro.imagenUrl != null ? libro.imagenUrl : '/img/libro-default.jpg'}"
+							class="card-img-top book-img" alt="Portada del libro en promoción">
+							
+						<div class="discount-badge text-white" th:text="'-' + ${#numbers.formatDecimal(libro.descuento * 100, 0, 0)} + '%'">
+							-15%
+						</div>
+					</figure>
+					
+					<div class="card-body text-center p-2">
+						<p class="book-author small text-muted mb-0" th:text="${libro.autor.nombre}"></p>
+						<h6 class="book-title mb-2" th:text="${libro.titulo}"></h6>
+
+						<div class="price-box">
+							<p class="old-price text-decoration-line-through text-muted small mb-0"
+								th:text="'S/ ' + ${#numbers.formatDecimal(libro.precio, 1, 2)}"></p>
+							<h5 class="final-price fw-bold"
+								th:text="'S/ ' + ${#numbers.formatDecimal(libro.getPrecioFinal(), 1, 2)}">S/ 19.99</h5>
+						</div>
+					</div>
+					
+					<div class="card-footer p-2 border-0 bg-white">
+                        <a href="#" class="btn btn-sm btn-block btn-primary w-100">
+                            Ver Libro
+                        </a>
+                    </div>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+</html>

@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Registrar Venta | Admin BookFlow</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    
+    <style>
+        /* Paleta de Colores Púrpura/Violeta */
+        :root {
+            --purple-dark: rgb(64, 0, 128); /* Navbar, Botón principal */
+            --purple-light: rgb(128, 0, 255); /* Encabezado de tabla, Borde de botones */
+            --bg-light: #f9fafc; /* Fondo del cuerpo */
+            --border-color: #e0e0e0;
+        }
+
+        body { 
+            background-color: var(--bg-light); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+        
+        /* Título Principal */
+        .text-primary {
+            color: var(--purple-dark) !important;
+        }
+        h2 {
+            font-weight: 700;
+        }
+
+        /* Contenedor de Formulario (Card) */
+        .card { 
+            border-radius: 12px; 
+            border: 1px solid var(--border-color);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08); 
+        }
+        
+        /* Labels del Formulario */
+        .form-label {
+            color: var(--purple-dark);
+            font-weight: 600;
+        }
+
+        /* Encabezado de Tabla de Detalles */
+        .table-secondary {
+            background-color: var(--purple-light) !important;
+            color: white;
+        }
+
+        /* Botón Agregar Libro */
+        .btn-outline-primary {
+            color: var(--purple-light);
+            border-color: var(--purple-light);
+        }
+        .btn-outline-primary:hover {
+            background-color: var(--purple-light);
+            color: white;
+        }
+
+        /* Botón Guardar Venta */
+        .btn-guardar { 
+            background-color: var(--purple-dark); 
+            color: white; 
+            font-weight: 600; 
+            border-color: var(--purple-dark);
+        }
+        .btn-guardar:hover { 
+            background-color: rgb(50, 0, 100); 
+            border-color: rgb(30, 0, 60); 
+        }
+
+        /* Botón Cancelar (Secundario) */
+        .btn-secondary {
+            background-color: #fff; /* Fondo blanco */
+            color: var(--purple-dark); /* Texto púrpura oscuro */
+            border: 1px solid var(--purple-dark);
+            font-weight: 600;
+        }
+
+        .btn-secondary:hover {
+            background-color: var(--purple-dark);
+            color: #fff;
+        }
+
+        /* Total de Venta */
+        #totalVenta {
+            color: var(--purple-light);
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+    </style>
+    </head>
+<body>
+
+<div class="container py-4">
+    <h2 class="text-center mb-4 text-primary"><i class="fa-solid fa-cash-register me-2"></i>Registrar Venta</h2>
+
+    <div th:if="${error}" class="alert alert-danger" th:text="${error}"></div>
+    <div th:if="${exito}" class="alert alert-success" th:text="${exito}"></div>
+
+    <form th:action="@{/admin/ventas/guardar}" th:object="${venta}" method="post">
+        <div class="card p-4">
+            <div class="mb-3">
+                <label class="form-label">Cliente</label>
+                <select class="form-select" th:field="*{usuario.id}" required>
+                    <option value="">Seleccione un cliente</option>
+                    <option th:each="u : ${usuarios}" th:value="${u.id}" th:text="${u.nombre + ' ' + u.apellido}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Libro</label>
+                <select class="form-select" name="libroId" id="libroSelect">
+                    <option value="">Seleccione un libro</option>
+                    <option th:each="l : ${libros}" th:value="${l.id}" th:data-precio="${l.precioFinal}" th:text="${l.titulo + ' (Stock: ' + l.stock + ')'}"></option>
+                </select>
+            </div>
+
+            <div class="mb-3">
+                <label class="form-label">Cantidad</label>
+                <input type="number" min="1" id="cantidadInput" class="form-control" placeholder="Ingrese cantidad">
+            </div>
+
+            <button type="button" class="btn btn-outline-primary mb-3" id="agregarLibro">
+                <i class="fa fa-plus"></i> Agregar Libro
+            </button>
+
+            <table class="table table-bordered align-middle">
+                <thead class="table-secondary">
+                    <tr>
+                        <th>Título</th>
+                        <th>Precio</th>
+                        <th>Cantidad</th>
+                        <th>Subtotal</th>
+                        <th>Acción</th>
+                    </tr>
+                </thead>
+                <tbody id="tablaDetalles"></tbody>
+            </table>
+
+            <h5 class="text-end">Total: <span id="totalVenta">S/ 0.00</span></h5>
+
+            <div class="mb-3">
+                <label class="form-label">Método de Pago</label>
+                <select class="form-select" th:field="*{metodoPago}" required>
+                    <option value="">Seleccione</option>
+                    <option value="Efectivo">Efectivo</option>
+                    <option value="Tarjeta">Tarjeta</option>
+                    <option value="Yape/Plin">Yape/Plin</option>
+                </select>
+            </div>
+
+            <div class="d-flex justify-content-end mt-4">
+                <a th:href="@{/admin/ventas}" class="btn btn-secondary me-2">Cancelar</a>
+                <button type="submit" class="btn btn-guardar"><i class="fa fa-save me-2"></i>Guardar Venta</button>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+    const tablaDetalles = document.getElementById('tablaDetalles');
+    const totalVenta = document.getElementById('totalVenta');
+    let total = 0;
+    let detalleIndex = 0; // Usaremos esto para nombrar los campos ocultos
+
+    document.getElementById('agregarLibro').addEventListener('click', () => {
+        const select = document.getElementById('libroSelect');
+        const cantidadInput = document.getElementById('cantidadInput');
+        const cantidad = parseInt(cantidadInput.value);
+        const libroId = select.value;
+        const titulo = select.options[select.selectedIndex].text;
+        const precio = parseFloat(select.options[select.selectedIndex].dataset.precio);
+
+        if (!libroId || !cantidad || cantidad <= 0) {
+            alert("Seleccione un libro y cantidad válida.");
+            return;
+        }
+        
+        // Validación de Stock (opcional, pero buena práctica si el stock está en el th:text)
+        const stockMatch = titulo.match(/\(Stock: (\d+)\)/);
+        const stockDisponible = stockMatch ? parseInt(stockMatch[1]) : 99999;
+        
+        if (cantidad > stockDisponible) {
+             alert(`Cantidad solicitada (${cantidad}) excede el stock disponible (${stockDisponible}).`);
+             return;
+        }
+
+        const subtotal = precio * cantidad;
+        total += subtotal;
+
+        const currentRowIndex = detalleIndex++; // Obtener y luego incrementar
+        
+        const fila = document.createElement('tr');
+        fila.dataset.subtotal = subtotal; // Guardar el subtotal en la fila para eliminar
+
+        fila.innerHTML = `
+            <td>
+                ${titulo.split(' (Stock:')[0]}
+                <input type="hidden" name="detalles[${currentRowIndex}].libro.id" value="${libroId}">
+            </td>
+            <td>S/ ${precio.toFixed(2)}</td>
+            <td>
+                ${cantidad}
+                <input type="hidden" name="detalles[${currentRowIndex}].cantidad" value="${cantidad}">
+            </td>
+            <td>S/ ${subtotal.toFixed(2)}</td>
+            <td><button type="button" class="btn btn-danger btn-sm eliminar"><i class="fa fa-trash"></i></button></td>
+        `;
+
+        fila.querySelector('.eliminar').addEventListener('click', function() {
+            total -= parseFloat(this.closest('tr').dataset.subtotal);
+            this.closest('tr').remove();
+            totalVenta.textContent = `S/ ${total.toFixed(2)}`;
+        });
+
+        tablaDetalles.appendChild(fila);
+        totalVenta.textContent = `S/ ${total.toFixed(2)}`;
+        
+        // Limpiar inputs
+        cantidadInput.value = '';
+        select.value = '';
+    });
+    
+    // Función para asegurar que el Total se envíe en el formulario
+    document.querySelector('form').addEventListener('submit', function() {
+        if (document.getElementById('detallesTotalInput')) {
+            document.getElementById('detallesTotalInput').remove();
+        }
+        
+        const totalInput = document.createElement('input');
+        totalInput.type = 'hidden';
+        totalInput.name = 'total';
+        totalInput.value = total.toFixed(2);
+        totalInput.id = 'detallesTotalInput';
+        this.appendChild(totalInput);
+        
+        // Si no hay detalles, prevenimos el envío o mostramos un error
+        if (tablaDetalles.children.length === 0) {
+            alert('Debe agregar al menos un libro a la venta.');
+            event.preventDefault();
+        }
+    });
+
+</script>
+
+</body>
+</html>

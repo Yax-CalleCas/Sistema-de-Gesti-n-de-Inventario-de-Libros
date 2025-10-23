@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org" lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Mi Carrito | Librería BookFlow</title>
+
+<link
+	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
+	rel="stylesheet">
+<link
+	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
+	rel="stylesheet">
+
+<link
+	href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;600;700&display=swap"
+	rel="stylesheet">
+<link rel="stylesheet" th:href="@{/Css/clienteCarrito.css}"> 
+
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+</head>
+
+<body class="bg-light">
+
+	<div th:replace="fragments/cliente_header :: header"></div>
+
+	<div class="container py-5">
+
+		<div class="d-flex justify-content-between align-items-center mb-5 border-bottom pb-3 header-carrito">
+			<h2 class="text-primary fw-bold mb-0">
+				<i class="fa-solid fa-cart-shopping me-2"></i> Tu Carrito de Compras
+			</h2>
+			<a href="/cliente/catalogo" class="btn btn-outline-primary"> 
+				<i class="fa-solid fa-arrow-left me-2"></i> Seguir comprando
+			</a>
+		</div>
+
+		<div th:if="${#lists.isEmpty(items)}" class="text-center empty-cart p-5 shadow-sm rounded-3 bg-white">
+			<i class="fa-solid fa-box-open fa-4x mb-4 text-muted"></i>
+			<h4 class="fw-semibold text-dark">¡Tu carrito está vacío!</h4>
+			<p class="text-muted fs-5">Explora nuestra colección y llénalo de nuevas historias.</p>
+			<a href="/cliente/catalogo" class="btn btn-primary btn-lg mt-3">
+				<i class="fa-solid fa-book me-2"></i> Ver catálogo ahora
+			</a>
+		</div>
+
+		<div th:if="${!#lists.isEmpty(items)}" class="row g-4">
+			
+			<div class="col-lg-8">
+				<div class="card border-0 shadow-lg p-3">
+					<div class="table-responsive">
+						<table class="table align-middle table-hover text-center table-carrito">
+							<thead class="table-primary text-white">
+								<tr>
+									<th class="text-start">Libro</th>
+									<th>Cantidad</th>
+									<th>Precio Unitario</th>
+									<th class="text-end">Subtotal</th>
+									<th class="text-center">Quitar</th>
+								</tr>
+							</thead>
+							<tbody>
+    <tr th:each="item : ${items}">
+        <td class="text-start d-flex align-items-center">
+            <img th:src="${item.libro.imagenUrl != null ? item.libro.imagenUrl : '/img/libro-default.jpg'}"
+                alt="Portada" class="book-thumb me-3">
+            <div>
+                <span class="fw-semibold d-block" th:text="${item.libro.titulo}"></span>
+                
+                <span th:if="${item.libro.descuento != null and item.libro.descuento > 0}"
+                      class="badge bg-danger">
+                    Desc. <span th:text="${#numbers.formatDecimal(item.libro.descuento * 100, 0, 0) + '%'}">10%</span>
+                </span>
+            </div>
+        </td>
+        
+        <td>
+            <div class="input-group input-group-sm quantity-control">
+                <input type="number" class="form-control text-center" 
+                       th:value="${item.cantidad}" min="1" max="50" style="width: 60px;">
+            </div>
+        </td>
+        
+        <td>
+            <span th:if="${item.libro.descuento != null and item.libro.descuento > 0}" 
+                  class="text-muted small d-block text-decoration-line-through">
+                S/ <span th:text="${#numbers.formatDecimal(item.libro.precio, 1, 2)}">50.00</span>
+            </span>
+            <span class="fw-semibold text-primary">
+                S/ <span th:text="${#numbers.formatDecimal(item.libro.precioFinal, 1, 2)}">45.00</span>
+            </span>
+        </td>
+            
+        <td class="fw-bolder text-end"
+            th:text="'S/ ' + ${#numbers.formatDecimal(item.subtotal, 1, 2)}">S/
+            45.00</td>
+            
+        <td class="text-center"><a
+            th:href="@{/carrito/eliminar/{id}(id=${item.libro.id})}"
+            class="btn btn-outline-danger btn-sm eliminar-item" title="Quitar item"> 
+            <i class="fa-solid fa-trash"></i>
+        </a></td>
+    </tr>
+</tbody>
+						</table>
+					</div>
+				</div>
+			</div>
+
+			<div class="col-lg-4">
+				<div class="card shadow-lg p-4 sticky-summary">
+					
+					<h5 class="fw-bold text-primary mb-4 border-bottom pb-2">
+						Resumen del Pedido
+					</h5>
+					
+					<div class="d-flex justify-content-between align-items-center mb-4">
+						<span class="fs-5 fw-semibold">Total a Pagar:</span>
+						<span class="text-primary fw-bolder fs-3"
+							th:text="'S/ ' + ${#numbers.formatDecimal(total, 1, 2)}">S/ 120.50</span>
+					</div>
+
+					<form th:action="@{/carrito/confirmar}" method="post" id="formPago"
+						class="mt-3">
+						
+						<div class="mb-4">
+							<label for="metodoPago" class="form-label fw-semibold text-muted">Método de Pago:</label> 
+							<select name="metodoPago" id="metodoPago"
+								class="form-select border-primary shadow-sm" required>
+								<option value="">-- Seleccionar método --</option>
+								<option value="Efectivo">Efectivo al recibir</option>
+								<option value="Tarjeta">Tarjeta de Crédito / Débito</option>
+								<option value="Yape">Yape</option>
+								<option value="Plin">Plin</option>
+							</select>
+						</div>
+						
+						<button type="submit"
+							class="btn btn-primary btn-lg px-5 shadow w-100 finalizar-compra-btn">
+							<i class="fa-solid fa-check-circle me-2"></i> Finalizar Compra
+						</button>
+					</form>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<div th:replace="fragments/cliente_footer :: footer"></div>
+
+	<script
+		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+
+	<script>
+        // ✅ Confirmar compra visualmente con SweetAlert2
+        document.getElementById('formPago')?.addEventListener('submit', function (e) {
+            e.preventDefault();
+            const metodoPago = document.getElementById('metodoPago').value;
+            
+            if (!metodoPago) {
+                Swal.fire({
+                    title: '¡Método de Pago Requerido!',
+                    text: 'Por favor, selecciona un método de pago antes de continuar.',
+                    icon: 'warning',
+                    confirmButtonColor: '#ffc107',
+                    confirmButtonText: 'Entendido'
+                });
+                return;
+            }
+
+            Swal.fire({
+                title: '¿Confirmar compra?',
+                text: "Estás a punto de realizar el pago de tu carrito.",
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonColor: '#400080', // Púrpura Oscuro
+                cancelButtonColor: '#6c757d',
+                confirmButtonText: 'Sí, pagar ahora 💳',
+                cancelButtonText: 'Cancelar'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    this.submit();
+                }
+            });
+        });
+
+        // 🗑️ Confirmación al eliminar un libro del carrito
+        document.querySelectorAll('.eliminar-item').forEach(btn => {
+            btn.addEventListener('click', function (e) {
+                e.preventDefault();
+                const url = this.getAttribute('href');
+                Swal.fire({
+                    title: '¿Eliminar este libro?',
+                    text: 'Se quitará del carrito.',
+                    icon: 'warning',
+                    showCancelButton: true,
+                    confirmButtonColor: '#d33',
+                    cancelButtonColor: '#6c757d',
+                    confirmButtonText: 'Sí, eliminar',
+                    cancelButtonText: 'Cancelar'
+                }).then((result) => {
+                    if (result.isConfirmed) {
+                        window.location.href = url;
+                    }
+                });
+            });
+        });
+    </script>
+
+</body>
+</html>

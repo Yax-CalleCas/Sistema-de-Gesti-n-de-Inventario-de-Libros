@@ -1,0 +1,146 @@
+/* ==========================================================
+   BookFlow: Estilos Panel de Trabajador (Azul Púrpura)
+   ========================================================== */
+
+:root {
+    --primary-color: #400080;       /* Púrpura Oscuro (Principal) */
+    --secondary-color: #8A2BE2;     /* Púrpura Azulado (Acento/Hover) */
+    --primary-light: #F0E6FF;       /* Púrpura muy claro (Fondos de tarjetas) */
+    --bg-light: #f5f7fa;            /* Fondo general claro */
+    --sidebar-width: 250px;
+}
+
+body {
+    font-family: 'Poppins', sans-serif;
+    background-color: var(--bg-light);
+    padding-top: 60px; /* Espacio para la barra de navegación fija */
+    padding-left: var(--sidebar-width); /* Espacio para el sidebar fijo */
+}
+
+/* --- 1. Navbar --- */
+.nav-bookflow {
+    background-color: var(--primary-color) !important;
+    height: 60px;
+}
+.navbar-brand {
+    font-size: 1.15rem;
+}
+.btn-outline-light {
+    color: white;
+    border-color: rgba(255, 255, 255, 0.5);
+    transition: background-color 0.2s;
+}
+.btn-outline-light:hover {
+    background-color: var(--secondary-color);
+    border-color: white;
+}
+
+/* --- 2. Sidebar --- */
+.sidebar {
+    position: fixed;
+    top: 60px; /* Debajo del navbar */
+    left: 0;
+    width: var(--sidebar-width);
+    height: calc(100% - 60px);
+    border-radius: 0;
+    box-shadow: 2px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1000;
+}
+
+.sidebar-title {
+    color: var(--primary-color) !important;
+    font-size: 1.1rem;
+}
+
+.sidebar-nav .nav-link {
+    color: #495057;
+    padding: 10px 15px;
+    border-radius: 6px;
+    transition: background-color 0.2s, color 0.2s;
+    font-weight: 500;
+}
+
+.sidebar-nav .nav-link:hover,
+.sidebar-nav .nav-link.active {
+    background-color: var(--primary-light);
+    color: var(--primary-color);
+    font-weight: 600;
+}
+
+/* --- 3. Main Content --- */
+.main-content {
+    margin-left: var(--sidebar-width);
+    padding: 20px;
+}
+
+.dashboard-header {
+    color: var(--primary-color) !important;
+    font-weight: 600;
+    border-bottom: 2px solid #eee;
+    padding-bottom: 10px;
+}
+
+/* --- 4. Métricas (KPI Cards) --- */
+.metric-card {
+    border: none;
+    border-radius: 10px;
+    background-color: #fff;
+    transition: box-shadow 0.3s;
+}
+.metric-card:hover {
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15) !important;
+}
+
+.metric-icon-box {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.bg-primary-light {
+    background-color: var(--primary-light) !important;
+}
+.metric-icon {
+    font-size: 1.5rem;
+}
+
+.metric-title {
+    font-size: 0.85rem;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+}
+.metric-value {
+    font-size: 2rem;
+    line-height: 1;
+}
+
+/* --- 5. Tabla de Alertas de Stock --- */
+.card-alert-stock {
+    border-radius: 10px;
+    overflow: hidden;
+}
+
+.card-header.bg-danger-subtle {
+    background-color: #fcebeb !important; /* Rojo claro para contraste */
+}
+
+.table-stock thead {
+    background-color: var(--primary-color) !important;
+}
+.table-stock thead th {
+    font-weight: 500;
+    font-size: 0.9rem;
+    border-bottom: none;
+}
+
+.btn-reponer {
+    color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-weight: 500;
+}
+.btn-reponer:hover {
+    background-color: var(--primary-color);
+    color: white;
+}

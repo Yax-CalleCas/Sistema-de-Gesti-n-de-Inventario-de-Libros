@@ -1,0 +1,91 @@
+   /* Paleta de Colores Púrpura/Violeta */
+        :root {
+            --purple-dark: rgb(64, 0, 128); /* Navbar, Botón principal */
+            --purple-light: rgb(128, 0, 255); /* Encabezado de tabla, Borde de botones */
+            --bg-light: #f9fafc; /* Fondo del cuerpo */
+            --border-color: #e0e0e0;
+        }
+
+        body { 
+            background-color: var(--bg-light); 
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            color: #333;
+        }
+
+        /* Título Principal */
+        .text-primary {
+            color: var(--purple-dark) !important;
+        }
+        
+        /* Botones Globales */
+        .btn-success {
+            background-color: var(--purple-dark);
+            border-color: var(--purple-dark);
+        }
+        .btn-success:hover, .btn-success:focus {
+            background-color: rgb(50, 0, 100);
+            border-color: rgb(30, 0, 60);
+        }
+        
+        .btn-outline-secondary {
+            color: var(--purple-light);
+            border-color: var(--purple-light);
+        }
+        .btn-outline-secondary:hover {
+            background-color: var(--purple-light);
+            color: #fff;
+        }
+        
+        /* Botones de Exportar (Primario y Peligro) */
+        .btn-primary {
+            background-color: var(--purple-light);
+            border-color: var(--purple-light);
+        }
+        .btn-primary:hover {
+            background-color: rgb(100, 0, 200);
+            border-color: rgb(80, 0, 160);
+        }
+        /* Dejamos el PDF (danger) en rojo por convención, pero ajustamos el sweetalert */
+
+        /* Tarjeta de Venta (simulando form-panel/card) */
+        .card {
+            border: 1px solid var(--border-color) !important;
+            border-radius: 12px !important;
+            box-shadow: 0 1px 6px rgba(0, 0, 0, 0.08) !important;
+        }
+        .card-title {
+             color: var(--purple-dark) !important;
+        }
+        
+        /* Badge de Fecha */
+        .badge.bg-info {
+            background-color: #e6e6fa !important; /* Lavanda suave */
+            color: var(--purple-dark) !important;
+            border: 1px solid rgb(128, 0, 255, 0.5);
+        }
+
+        /* Encabezado de la tabla de detalles */
+        .table thead th { 
+            background-color: var(--purple-light); 
+            color: white; 
+            border-color: rgb(100, 0, 200);
+            font-size: 0.85rem;
+        }
+        .table-bordered {
+            border: 1px solid #ddd;
+        }
+        
+        /* Total General */
+        .alert.alert-primary {
+            background-color: var(--purple-light);
+            color: white;
+            border-color: rgb(100, 0, 200);
+            border-radius: 12px;
+        }
+
+        /* Footer */
+        footer { 
+            background-color: #fff; 
+            border-top: 1px solid var(--border-color);
+            border-radius: 12px;
+        }

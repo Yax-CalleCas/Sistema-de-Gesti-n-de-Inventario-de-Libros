@@ -1,0 +1,151 @@
+
+
+:root {
+    --primary-color: rgb(64, 0, 128);       /* Púrpura Oscuro (Botón Añadir) */
+    --secondary-color: rgb(128, 0, 255);    /* Púrpura Brillante (Header) */
+    --bg-light: #f5f7fa;                    
+    --shadow-light: 0 4px 10px rgba(0, 0, 0, 0.08);
+}
+
+body {
+    background-color: var(--bg-light);
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+/* --- 1. Encabezado de Página --- */
+.header-band {
+    background-color: var(--secondary-color);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.section-title {
+    color: var(--primary-color);
+    font-weight: 700;
+    font-size: 1.8rem;
+    border-bottom: 2px solid #eee;
+}
+
+/* --- 2. Tarjeta de Libro (Diseño Compacto) --- */
+
+.book-card {
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px; /* Borde ligeramente reducido */
+    overflow: hidden;
+    transition: transform 0.2s, box-shadow 0.2s;
+}
+
+.book-card:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-light);
+}
+
+/* --- 3. Sección de Imagen --- */
+
+.book-img-container {
+    position: relative;
+    overflow: hidden;
+    margin: 0;
+    padding: 8px;
+    background-color: #fcfcfc;
+    border-bottom: 1px solid #eee;
+    /* Altura reducida para hacer la tarjeta más pequeña */
+    height: 180px; 
+}
+
+.book-img {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    border-radius: 4px;
+    transition: transform 0.3s;
+}
+
+.book-card:hover .book-img {
+    transform: scale(1.05);
+}
+
+/* Badge de Descuento */
+.badge-descuento {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background-color: #ffc107; 
+    color: #333;
+    padding: 3px 6px; /* Padding reducido */
+    border-radius: 4px;
+    font-weight: bold;
+    font-size: 0.75rem; /* Tamaño de fuente reducido */
+}
+
+/* Overlay de AGOTADO */
+.stock-overlay {
+    /* ... (estilo se mantiene) ... */
+    font-size: 1rem;
+}
+
+
+/* --- 4. Cuerpo y Precios --- */
+
+.book-title {
+    /* Tamaño de fuente más pequeño para títulos */
+    font-size: 0.9rem;
+    font-weight: 600;
+    color: #444;
+    margin-bottom: 3px;
+    height: 2.2rem; /* Altura fija para evitar saltos */
+    overflow: hidden;
+}
+
+.book-author {
+    font-size: 0.8rem; /* Autor más pequeño */
+    color: #888;
+}
+
+.book-price {
+    /*  Precio final ligeramente más pequeño pero destacado */
+    color: var(--primary-color);
+    font-size: 1.1rem;
+}
+
+.book-old-price {
+    font-size: 0.8rem;
+    color: #999;
+}
+
+.stock-count {
+    font-size: 0.85rem;
+}
+
+/* Alerta de stock bajo */
+.stock-alert small {
+    font-size: 0.75rem;
+}
+
+/* --- 5. Pie de Tarjeta (Formulario) --- */
+
+.card-footer {
+    border-top: 1px solid #eee !important;
+    padding: 8px !important; /* Padding reducido */
+}
+
+.btn-sm {
+    padding: 4px 8px; /* Botones más pequeños */
+    font-size: 0.85rem;
+}
+
+.form-control-sm {
+    height: 30px; /* Altura del input de cantidad */
+    width: 50px !important; 
+}
+
+.btn-agregar {
+    background-color: var(--primary-color);
+    border-color: var(--primary-color);
+    font-weight: 600;
+}
+
+.btn-agregar:hover {
+    background-color: rgb(50, 0, 100);
+    border-color: rgb(30, 0, 60);
+}

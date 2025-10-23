@@ -1,0 +1,88 @@
+/* ==========================================================
+   BookFlow: Estilos Gestión de Categorías (Azul Púrpura)
+   ========================================================== */
+
+:root {
+    --primary-color: #400080;       /* Púrpura Oscuro (Principal) */
+    --secondary-color: #8A2BE2;     /* Púrpura Azulado (Acento) */
+    --primary-alt: #007bff;         /* Azul Brillante (Botón Guardar) */
+    --primary-dark: #2c3e50;        /* Texto oscuro */
+    --bg-light: #f5f7fa;            /* Fondo general claro */
+}
+
+body {
+    background-color: var(--bg-light);
+    font-family: 'Poppins', sans-serif;
+}
+
+/* --- Título y Header --- */
+.page-title {
+	color: var(--primary-color) !important;
+	font-weight: 700;
+}
+
+.btn-accion {
+	border-radius: 50px; 
+	font-size: 0.85rem;
+	padding: 0.4rem 0.8rem;
+}
+
+/* Botón Guardar (Formulario) */
+.btn-primary-alt {
+	background-color: var(--primary-color);
+	border-color: var(--primary-color);
+	font-weight: 600;
+	color: white;
+}
+.btn-primary-alt:hover {
+	background-color: rgb(50, 0, 100);
+	border-color: rgb(30, 0, 60);
+}
+
+/* --- Tarjeta de Formulario y Listado --- */
+.card-gestion, .card-form {
+	border-radius: 15px;
+	border: none;
+	box-shadow: 0 8px 25px rgba(0, 0, 0, 0.1);
+}
+
+.card-header.bg-primary {
+	background-color: var(--primary-color) !important;
+}
+
+.card-form {
+    top: 20px; 
+}
+
+/* Estilos de tabla */
+.table-categorias thead {
+	background-color: var(--primary-color) !important;
+	color: #fff;
+	font-weight: 600;
+    font-size: 0.95rem;
+}
+
+.table-categorias tbody tr:hover {
+    background-color: #f0f0f0;
+}
+
+.text-primary-dark {
+    color: var(--primary-dark) !important;
+}
+
+/* Acciones (Botones circulares) */
+.btn-accion:not(.btn-outline-secondary, .btn-primary-alt) {
+	border-radius: 50%; 
+	font-size: 0.9rem;
+	padding: 0.5rem 0.5rem;
+    line-height: 1;
+}
+
+.btn-outline-warning {
+    color: #f39c12;
+    border-color: #f39c12;
+}
+.btn-outline-warning:hover {
+    background-color: #f39c12;
+    color: white;
+}
