@@ -1,97 +1,157 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org" lang="es">
 <head>
-<meta charset="UTF-8">
-<title>Panel del Cliente | Librería BookFlow</title>
-
-<!-- Estilos base -->
-<link
-	href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-	rel="stylesheet">
-<link
-	href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"
-	rel="stylesheet">
-
-<link rel="stylesheet" th:href="@{/Css/clientePanel.css}">
+    <meta charset="UTF-8">
+    <title>Panel del Cliente | Librería BookFlow</title>
+    <!-- Tailwind CSS CDN -->
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
+    <!-- Font Awesome for icons -->
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css" rel="stylesheet">
+    <!-- Poppins Font (from footer) -->
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        body {
+            font-family: 'Poppins', sans-serif;
+        }
+        .hero-section {
+            background: linear-gradient(135deg, #FFF7E6 0%, #E0F2FE 100%);
+        }
+        .metric-card:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+        .video-section:hover {
+            box-shadow: 0 10px 20px rgba(0, 0, 0, 0.15);
+        }
+        .product-card:hover {
+            transform: translateY(-5px);
+        }
+        .benefit-list li:hover {
+            background-color: #ecfdf5;
+        }
+        .btn-primary {
+            background-color: #002B7F;
+            color: #FFFFFF;
+        }
+        .btn-primary:hover {
+            background-color: #005CBF;
+        }
+        .text-primary {
+            color: #002B7F;
+        }
+        .text-accent {
+            color: #F59E0B;
+        }
+    </style>
 </head>
+<body class="bg-gray-50">
+    <div th:replace="fragments/cliente_header :: header"></div>
 
-<body>
-	<!-- Cabecera -->
-	<div th:replace="fragments/cliente_header :: header"></div>
+    <!-- Hero Section -->
+    <div class="hero-section py-12 text-center">
+        <h2 class="text-3xl md:text-4xl font-bold text-primary mb-2">
+            ¡Hola, <span class="text-accent" th:text="${usuario.nombre}"></span>!
+        </h2>
+        <p class="text-lg text-gray-600">Descubre los mejores libros y gestiona tus compras en BookFlow.</p>
+    </div>
 
-	<div class="container py-4">
+    <div class="container mx-auto px-4 py-8">
+        <!-- Metrics Section -->
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+            <div class="metric-card bg-white p-6 rounded-lg shadow-md transition-transform duration-300">
+                <i class="fa-solid fa-cart-shopping text-4xl text-primary mb-4"></i>
+                <h5 class="text-lg font-semibold text-gray-700">Artículos en Carrito</h5>
+                <h3 class="text-2xl font-bold text-primary" th:text="${cantidadCarrito}">0</h3>
+                <a href="/cliente/carrito" class="mt-4 inline-block btn-primary py-2 px-4 rounded-lg hover:bg-blue-600">Gestionar carrito</a>
+            </div>
+            <div class="metric-card bg-white p-6 rounded-lg shadow-md transition-transform duration-300">
+                <i class="fa-solid fa-receipt text-4xl text-green-500 mb-4"></i>
+                <h5 class="text-lg font-semibold text-gray-700">Total de Compras</h5>
+                <h3 class="text-2xl font-bold text-green-500" th:text="${totalCompras}">0</h3>
+                <a href="/cliente/compras" class="mt-4 inline-block bg-green-500 text-white py-2 px-4 rounded-lg hover:bg-green-600">Ver historial</a>
+            </div>
+            <div class="metric-card bg-white p-6 rounded-lg shadow-md transition-transform duration-300">
+                <i class="fa-solid fa-gift text-4xl text-yellow-500 mb-4"></i>
+                <h5 class="text-lg font-semibold text-gray-700">Promociones Activas</h5>
+                <h3 class="text-2xl font-bold text-yellow-500" th:text="${totalPromociones}">0</h3>
+                <a href="/cliente/promociones" class="mt-4 inline-block bg-yellow-500 text-white py-2 px-4 rounded-lg hover:bg-yellow-600">Descubrir ofertas</a>
+            </div>
+        </div>
 
-		<h2 class="mb-4 fw-bold">
-			Bienvenido, <span th:text="${usuario.nombre}"></span> 👋
-		</h2>
+        <!-- Video Section -->
+        <div class="video-section bg-white p-6 rounded-lg shadow-md mb-8 transition-shadow duration-300">
+            <h3 class="text-2xl font-bold text-primary mb-4 text-center">
+                <i class="fa-solid fa-graduation-cap mr-2"></i> 5 razones científicas para leer más libros
+            </h3>
+            <hr class="border-gray-200 mb-6">
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div>
+                    <div class="relative" style="padding-bottom: 56.25%;">
+                        <iframe class="absolute top-0 left-0 w-full h-full rounded-lg" 
+                                src="https://www.youtube.com/embed/OUPREg9FTIc" 
+                                title="5 Beneficios de la lectura científicamente probados" 
+                                frameborder="0" 
+                                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" 
+                                allowfullscreen></iframe>
+                    </div>
+                    <p class="text-sm text-gray-500 mt-2 text-center">Fuente: Supercurioso | Video (2:37)</p>
+                </div>
+                <div>
+                    <h5 class="text-lg font-semibold text-green-500 mb-3">Lee más y mejora tu vida:</h5>
+                    <ul class="benefit-list space-y-2">
+                        <li class="flex items-center p-3 rounded bg-green-50 transition-colors duration-300">
+                            <i class="fa-solid fa-brain mr-2 text-green-500"></i>
+                            <span><strong>Salud Cerebral:</strong> Previene el Alzheimer y enfermedades neurodegenerativas.</span>
+                        </li>
+                        <li class="flex items-center p-3 rounded bg-green-50 transition-colors duration-300">
+                            <i class="fa-solid fa-lightbulb mr-2 text-green-500"></i>
+                            <span><strong>Inteligencia:</strong> Mejora la conectividad cerebral y la capacidad de razonar.</span>
+                        </li>
+                        <li class="flex items-center p-3 rounded bg-green-50 transition-colors duration-300">
+                            <i class="fa-solid fa-earth-americas mr-2 text-green-500"></i>
+                            <span><strong>Cultura:</strong> Amplía tu conocimiento general y vocabulario.</span>
+                        </li>
+                        <li class="flex items-center p-3 rounded bg-green-50 transition-colors duration-300">
+                            <i class="fa-solid fa-people-arrows mr-2 text-green-500"></i>
+                            <span><strong>Empatía:</strong> Te permite entender mejor las perspectivas y sentimientos de otros.</span>
+                        </li>
+                        <li class="flex items-center p-3 rounded bg-green-50 transition-colors duration-300">
+                            <i class="fa-solid fa-comments mr-2 text-green-500"></i>
+                            <span><strong>Comunicación:</strong> Te hace una persona más interesante y elocuente.</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
 
-		<!--  Resumen general -->
-		<div class="row g-3 mb-4 text-center">
-			<div class="col-md-4">
-				<div class="card p-3">
-					<i class="fa-solid fa-cart-shopping fa-2x mb-2"></i>
-					<h5 class="fw-semibold">Carrito</h5>
-					<h4 class="text-secondary" th:text="${cantidadCarrito}">0</h4>
-					<a href="/cliente/carrito"
-						class="btn btn-outline-primary btn-sm mt-2">Ver carrito</a>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card p-3">
-					<i class="fa-solid fa-receipt fa-2x mb-2"></i>
-					<h5 class="fw-semibold">Compras</h5>
-					<h4 class="text-secondary" th:text="${totalCompras}">0</h4>
-					<a href="/cliente/compras"
-						class="btn btn-outline-primary btn-sm mt-2">Ver historial</a>
-				</div>
-			</div>
-			<div class="col-md-4">
-				<div class="card p-3">
-					<i class="fa-solid fa-gift fa-2x mb-2"></i>
-					<h5 class="fw-semibold">Promociones</h5>
-					<h4 class="text-secondary" th:text="${totalPromociones}">0</h4>
-					<a href="/cliente/promociones"
-						class="btn btn-outline-primary btn-sm mt-2">Ver ofertas</a>
-				</div>
-			</div>
-		</div>
-
-
-
-		<!--  Libros recomendados -->
-		<h4 class="section-title mt-5 mb-3"> Libros recomendados</h4>
-<div class="row g-3">
-    <div class="col-md-3" 
-         th:each="libro : ${librosRecomendados.size() > 4 ? librosRecomendados.subList(0, 4) : librosRecomendados}">
-        <div class="card shadow-sm border-0 h-100">
-            <img
-                th:src="${libro.imagenUrl != null ? libro.imagenUrl : '/img/libro-default.jpg'}"
-                class="card-img-top" style="height: 250px; object-fit: cover;"
-                alt="Portada del libro">
-            <div class="card-body text-center">
-                <h6 th:text="${libro.titulo}" class="fw-bold text-primary"></h6>
-                <p class="text-muted small mb-1" th:text="${libro.autor.nombre}"></p>
-                <p class="price" th:text="'S/ ' + ${libro.precioFinal}"></p>
-                
-                <form th:action="@{/carrito/agregar/{id}(id=${libro.id})}"
-                    method="post" class="d-flex justify-content-center">
-                    <input type="number" name="cantidad" value="1" min="1" max="50"
-                        class="form-control form-control-sm text-center me-2"
-                        style="width: 70px;">
-                    <button type="submit" class="btn btn-success btn-sm"
-                        th:disabled="${libro.stock == 0}">
-                        <i class="fa-solid fa-cart-plus"></i> Agregar
-                    </button>
-                </form>
+        <!-- Recommendations Section -->
+        <h4 class="text-2xl font-bold text-primary mb-4">
+            <i class="fa-solid fa-fire mr-2 text-accent"></i> Recomendaciones para ti
+        </h4>
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <div class="product-card bg-white rounded-lg shadow-md overflow-hidden transition-transform duration-300" 
+                 th:each="libro : ${librosRecomendados.size() > 4 ? librosRecomendados.subList(0, 4) : librosRecomendados}">
+                <img th:src="${libro.imagenUrl != null ? libro.imagenUrl : '/img/libro-default.jpg'}"
+                     class="w-full h-64 object-cover" alt="Portada del libro">
+                <div class="p-4 text-center">
+                    <h6 th:text="${libro.titulo}" class="text-lg font-bold text-primary mb-2"></h6>
+                    <p class="text-sm text-gray-600 mb-1" th:text="${libro.autor.nombre}"></p>
+                    <p class="text-lg font-semibold text-accent mb-3" th:text="'S/ ' + ${libro.precioFinal}"></p>
+                    <form th:action="@{/carrito/agregar/{id}(id=${libro.id})}" method="post" class="flex justify-center items-center">
+                        <input type="number" name="cantidad" value="1" min="1" max="50"
+                               class="w-16 text-center border rounded-l py-2 px-3 focus:outline-none focus:ring-2 focus:ring-primary">
+                        <button type="submit" class="btn-primary py-2 px-4 rounded-r hover:bg-blue-600"
+                                th:disabled="${libro.stock == 0}">
+                            <i class="fa-solid fa-cart-plus mr-1"></i> Agregar
+                        </button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
-		
 
-	<div th:replace="fragments/cliente_footer :: footer"></div>
-	<script
-		src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
-
+    <div th:replace="fragments/cliente_footer :: footer"></div>
+    <!-- SweetAlert2 (from header) -->
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 </body>
 </html>
