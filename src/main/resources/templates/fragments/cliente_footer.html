@@ -1,92 +1,52 @@
-<!-- fragments/footer_cliente.html -->
-<footer th:fragment="footer"
-	class="footer mt-5 text-center text-lg-start">
-	<style>
-.footer {
-	background-color: #FFC107;
-	color: #002B7F;
-	font-family: 'Poppins', sans-serif;
-	font-size: 0.95rem;
-	border-top: 3px solid #002B7F;
-}
+<footer th:fragment="footer" class="bg-yellow-400 text-blue-900 font-poppins">
+    <div class="container mx-auto px-4 py-8">
+        <div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-6">
+            <!-- Sobre BookFlow -->
+            <div>
+                <h6 class="text-lg font-bold text-blue-900 uppercase mb-4">Sobre BookFlow</h6>
+                <p class="text-sm text-blue-900">Tu librería online de confianza. Encuentra libros al mejor precio con envíos rápidos.</p>
+            </div>
 
-.footer .container {
-	padding: 40px 0;
-}
+            <!-- Atención al Cliente -->
+            <div>
+                <h6 class="text-lg font-bold text-blue-900 uppercase mb-4">Atención al Cliente</h6>
+                <ul class="space-y-2">
+                    <li><a href="#" class="text-blue-900 hover:text-blue-600 transition-colors duration-300">Preguntas Frecuentes</a></li>
+                    <li><a href="#" class="text-blue-900 hover:text-blue-600 transition-colors duration-300">Política de Privacidad</a></li>
+                </ul>
+            </div>
 
-.footer h6 {
-	font-weight: 700;
-	color: #002B7F;
-	text-transform: uppercase;
-	margin-bottom: 15px;
-}
+            <!-- Contáctanos -->
+            <div>
+                <h6 class="text-lg font-bold text-blue-900 uppercase mb-4">Contáctanos</h6>
+                <ul class="space-y-2">
+                    <li><i class="fa-solid fa-location-dot mr-2"></i> Piura, Perú</li>
+                    <li><i class="fa-solid fa-envelope mr-2"></i> soporte@bookflow.com</li>
+                    <li><i class="fa-solid fa-phone mr-2"></i> +51 900 624 321</li>
+                </ul>
+            </div>
 
-.footer a {
-	color: #002B7F;
-	text-decoration: none;
-	transition: color 0.3s ease;
-}
-
-.footer a:hover {
-	color: #0a4abf;
-}
-
-.footer .social-icons a {
-	font-size: 1.3rem;
-	margin: 0 8px;
-}
-
-.footer-bottom {
-	background-color: #002B7F;
-	color: #ffffff;
-	padding: 10px 0;
-	font-size: 0.9rem;
-}
-</style>
-
-	<div class="container text-center text-md-start">
-		<div class="row">
-			<!-- Columna 1 -->
-			<div class="col-md-3 mb-4">
-				<h6>Sobre BookFlow</h6>
-				<p>Tu librería online de confianza. Encuentra tus libros
-					favoritos al mejor precio, con envíos rápidos y seguros.</p>
-			</div>
-
-			<!-- Columna 2 -->
-			<div class="col-md-3 mb-4">
-				<h6>Atención al cliente</h6>
-				<ul class="list-unstyled">
-					<li><a href="#">Preguntas frecuentes</a></li>
-					<li><a href="#">Términos y condiciones</a></li>
-					<li><a href="#">Política de privacidad</a></li>
-				</ul>
-			</div>
-
-			<!-- Columna 3 -->
-			<div class="col-md-3 mb-4">
-				<h6>Contáctanos</h6>
-				<ul class="list-unstyled">
-					<li><i class="fa-solid fa-location-dot me-2"></i> Lima, Perú</li>
-					<li><i class="fa-solid fa-envelope me-2"></i>
-						soporte@bookflow.com</li>
-					<li><i class="fa-solid fa-phone me-2"></i> +51 987 654 321</li>
-				</ul>
-			</div>
-
-			<!-- Columna 4 -->  
-			<div class="col-md-3 mb-4">
-				<h6>Síguenos</h6>
-				<div class="social-icons">
-					<a href="#"><i class="fa-brands fa-facebook"></i></a> <a href="#"><i
-						class="fa-brands fa-instagram"></i></a> <a href="#"><i
-						class="fa-brands fa-x-twitter"></i></a> <a href="#"><i
-						class="fa-brands fa-youtube"></i></a>
-				</div>
-			</div>
-		</div>
-	</div>
-
-	<div class="footer-bottom text-center">© 2025 BookFlow |
-		Desarrollado con 💙 por tu equipo de confianza</div>
+            <!-- Síguenos -->
+            <div>
+                <h6 class="text-lg font-bold text-blue-900 uppercase mb-4">Síguenos</h6>
+                <div class="flex space-x-4">
+                    <a href="#" aria-label="Facebook" class="text-blue-900 hover:text-blue-600 hover:scale-110 transition-transform duration-300">
+                        <i class="fa-brands fa-facebook text-xl"></i>
+                    </a>
+                    <a href="#" aria-label="Instagram" class="text-blue-900 hover:text-blue-600 hover:scale-110 transition-transform duration-300">
+                        <i class="fa-brands fa-instagram text-xl"></i>
+                    </a>
+                    <a href="#" aria-label="Twitter" class="text-blue-900 hover:text-blue-600 hover:scale-110 transition-transform duration-300">
+                        <i class="fa-brands fa-x-twitter text-xl"></i>
+                    </a>
+                    <a href="#" aria-label="YouTube" class="text-blue-900 hover:text-blue-600 hover:scale-110 transition-transform duration-300">
+                        <i class="fa-brands fa-youtube text-xl"></i>
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="bg-blue-900 text-white text-center py-3 text-sm">
+        © 2025 BookFlow | Desarrollado con 💙
+    </div>
 </footer>
